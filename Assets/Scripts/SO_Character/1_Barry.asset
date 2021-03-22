@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b521672468d00149994c1a8aab0db54, type: 3}
+  m_Name: 1_Barry
+  m_EditorClassIdentifier: 
+  characterName: Barry
+  story: {fileID: 11400000, guid: 5d83b9a6d7f7d18449d9b5a53ffb53aa, type: 2}
+  givenItem: 0
+  itemThanks:
+  - {fileID: 11400000, guid: 8ca5720550d18d9468be3b3ab6fa1e5a, type: 2}

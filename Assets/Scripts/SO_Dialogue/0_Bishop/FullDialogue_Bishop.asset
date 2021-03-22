@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b850ced816b635e4c8c5d220900b8409, type: 3}
+  m_Name: FullDialogue_Bishop
+  m_EditorClassIdentifier: 
+  characterName: Bishop
+  storyDialogues:
+  - {fileID: 11400000, guid: ccdd177b4c543ea49be6f4dbdb5aedcf, type: 2}
+  - {fileID: 11400000, guid: 25828905fce93c347a830c37e3362d96, type: 2}
+  - {fileID: 11400000, guid: a0856d76825a35c448969e7badfa4c35, type: 2}
+  - {fileID: 11400000, guid: cf2fde6eca81cf04595ad92e7ed7c219, type: 2}
+  - {fileID: 11400000, guid: f1190d49f8dc79f4ab06699894d290a3, type: 2}
+  - {fileID: 11400000, guid: 342743b1efb042d47bfbdc153f510165, type: 2}

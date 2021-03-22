@@ -1,0 +1,176 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
+public class LevelLoaderManager : MonoBehaviour
+{
+    public static LevelLoaderManager instance;
+    public GameObject loadingBars;
+    public Slider loadingBar;
+    [SerializeField] public GameObject fade;
+    [SerializeField] public AudioSource audioSource;
+
+
+    enum SceneType { name, buildIndex, scene};
+    SceneType sceneType;
+
+    public string sceneName;
+    public int buildIndex;
+    Scene sceneScene;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void Start()
+    {
+        DialogueManager.instance.onDialogueFinished += LoadNextLevel;
+    }
+    public void LoadNextLevel()
+    {
+        if (StoryManager.instance.canLoadNextLevel)
+        {
+            StoryManager.instance.canLoadNextLevel = false;
+            GameManager.instance.chapter++;
+            //look for current music and fade it out
+            //will need to prevent radar cam from being first found--uses GDFS
+            //AudioSource audio = FindObjectOfType<Camera>().GetComponent<AudioSource>(); //will change each level
+            StartCoroutine(FadeOutAudio(audioSource, .5f));
+            //fade out to black
+            fade.SetActive(true);
+            fade.GetComponent<FadeManager>().FadeOut();
+            //start loading
+            StartCoroutine(PauseBeforeLoad());
+        }
+    }
+
+    //load scene overloads depending on how the index is given
+    public void LoadScene(string name)
+    {
+        sceneType = SceneType.name;
+        sceneName = name;
+        StartCoroutine(nameof(LoadLoadingScene));
+    }
+    public void LoadScene(int buildIndex)
+    {
+        sceneType = SceneType.buildIndex;
+        this.buildIndex = buildIndex;
+        StartCoroutine(nameof(LoadLoadingScene));
+    }
+    public void LoadScene(Scene scene)
+    {
+        sceneType = SceneType.scene;
+        sceneScene = scene;
+        StartCoroutine(nameof(LoadLoadingScene));
+    }
+    //the coroutine that begins everything
+    //loads the loading scene while the scene loads in the background
+    IEnumerator LoadLoadingScene()
+    {
+        yield return SceneManager.LoadSceneAsync("x_Loading");
+        StartCoroutine(SceneLoad());
+
+    }
+    //
+    IEnumerator SceneLoad()
+    {
+        switch (sceneType)
+        {
+            case SceneType.name:
+                AsyncOperation sceneLoadingName = SceneManager.LoadSceneAsync(sceneName);
+                sceneLoadingName.allowSceneActivation = false;
+
+                while (!sceneLoadingName.isDone)
+                {
+                    float progress = Mathf.Clamp01(sceneLoadingName.progress / .9f);
+                    loadingBars.SetActive(true);
+                    loadingBar.value = progress;
+                if (sceneLoadingName.progress >= 0.9f)
+                {
+                    loadingBar.value = progress;
+                    StartCoroutine(WaitForBar(sceneLoadingName));
+                }
+                yield return null;
+
+                }
+            break;
+            case SceneType.buildIndex:
+                AsyncOperation sceneLoadingIndex = SceneManager.LoadSceneAsync(buildIndex);
+                sceneLoadingIndex.allowSceneActivation = false;
+
+                while (!sceneLoadingIndex.isDone)
+                {
+                    float progress = Mathf.Clamp01(sceneLoadingIndex.progress / .9f);
+                    loadingBars.SetActive(true);
+                    loadingBar.value = progress;
+                    if (sceneLoadingIndex.progress >= 0.9f)
+                    {
+                        loadingBar.value = progress;
+                        StartCoroutine(WaitForBar(sceneLoadingIndex));
+                    }
+                    yield return null;
+
+                }
+            break;
+            case SceneType.scene:
+                AsyncOperation sceneLoadinScene = SceneManager.LoadSceneAsync(sceneScene.buildIndex);
+                while (!sceneLoadinScene.isDone)
+                {
+                    float progress = Mathf.Clamp01(sceneLoadinScene.progress / .9f);
+                    loadingBars.SetActive(true);
+                    loadingBar.value = progress;
+                if (sceneLoadinScene.progress >= 0.9f)
+                {
+                    loadingBar.value = progress;
+                    StartCoroutine(WaitForBar(sceneLoadinScene));
+                }
+                yield return null;
+
+                }
+            break;
+            default:
+            break;
+        }
+        
+        
+    }
+    IEnumerator WaitForBar(AsyncOperation sceneLoadingIndex)
+    {
+        yield return null;
+        loadingBars.SetActive(false);
+        sceneLoadingIndex.allowSceneActivation = true;
+    }
+    
+    IEnumerator FadeOutAudio(AudioSource audioSource, float FadeTime)
+    {
+        float startVolume = audioSource.volume;
+        while (audioSource.volume > 0.02)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
+            yield return null;
+        }
+        audioSource.Stop();
+        audioSource.volume = startVolume;
+        
+    }
+    IEnumerator PauseBeforeLoad()
+    {
+        yield return new WaitForSeconds(1f);
+        var thisScene = SceneManager.GetActiveScene();
+        var nextScene = thisScene.buildIndex + 1;
+        LoadScene(nextScene);
+    }
+
+}
