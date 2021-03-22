@@ -72,8 +72,8 @@ crashlytics-build.properties
 
 #Only want scripts
 /[Pp]ackages/
-/[Pp]roject[Se]settings/
+/[Pp]roject[Se]ettings/
 /[Tt]est[Bb]uild/
 /[Tt]est[Bb]uild[Pp][Cc]/
 /[Aa]ssets/*
-![As]ssets/Scripts/
+/![As]ssets/Scripts/
