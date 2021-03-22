@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b850ced816b635e4c8c5d220900b8409, type: 3}
+  m_Name: FullDialogue_Zhao
+  m_EditorClassIdentifier: 
+  characterName: Name
+  storyDialogues:
+  - {fileID: 11400000, guid: a9322d068c2982043b07795550954af9, type: 2}
+  - {fileID: 11400000, guid: aeaae1bf3fa820440b43f1fb8cb54a7f, type: 2}
+  - {fileID: 11400000, guid: 38d0eab9a6f659349bebecd2376d5abe, type: 2}
+  - {fileID: 11400000, guid: cd25635e6422a604aba56522f46efb4c, type: 2}
+  - {fileID: 11400000, guid: f5621a67730c2cb44b24472c9e319c9d, type: 2}
+  - {fileID: 11400000, guid: f933d3a3817bd944dbd26c0c643254dc, type: 2}
