@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimationAudioSync : MonoBehaviour
 { 
     //hello github
+    //hello desktop
     public enum CurrentMovement { Right, Left, Up, Down};
     public void PlayerHorizontalStepTaken()
     {
