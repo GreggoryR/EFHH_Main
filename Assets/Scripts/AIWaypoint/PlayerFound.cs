@@ -1,8 +1,11 @@
+////////////////////////////////////////////////////////////////////////////
+//FileName: PlayerFound.cs
+//Author : Greggory Reed
+//Description : Class for detecting the player and activating correct events
+////////////////////////////////////////////////////////////////////////////
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
-using Cinemachine;
 using System;
 
 public class PlayerFound : MonoBehaviour
@@ -16,7 +19,6 @@ public class PlayerFound : MonoBehaviour
 
     [Header("Transform")]
     [SerializeField] Transform enemyPosition;
-
 
     [Header("Chase Cinematics")]
     [SerializeField] GameObject ui_chase_canvas;
@@ -35,10 +37,8 @@ public class PlayerFound : MonoBehaviour
             playerInCircle = true;
             FindWall = FindPlayerOrWall(collision);
             StartCoroutine(FindWall);
-            
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -54,7 +54,6 @@ public class PlayerFound : MonoBehaviour
             playerInCircle = false;
         }
     }
-
     private IEnumerator FindPlayerOrWall(Collider2D collision)
     {
         if (playerInCircle && !GameManager.instance.beingChased)
@@ -73,7 +72,6 @@ public class PlayerFound : MonoBehaviour
             }
         }
     }
-
     private void ChasePlayer()
     {
         playerLost.SetActive(true);
@@ -90,6 +88,4 @@ public class PlayerFound : MonoBehaviour
         //ui_image_animator.Play("UI_chase_ani");
         gameObject.SetActive(false);
     }
-
-    
 }

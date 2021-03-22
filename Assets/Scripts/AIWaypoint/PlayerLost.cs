@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////
+//FileName: PlayerLost.cs
+//Author : Greggory Reed
+//Description : Class for detecting when enemy loses the player
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
-using Pathfinding;
-using Cinemachine;
 
 public class PlayerLost : MonoBehaviour
 {
@@ -35,5 +37,4 @@ public class PlayerLost : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
-
 }

@@ -1,4 +1,9 @@
-using System.Collections;
+////////////////////////////////////////////////////////////
+//FileName: AIWaypointList.cs
+//Author : Greggory Reed
+//Description : Class for generating a list of waypoints for each enemy
+////////////////////////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +20,6 @@ public class AIWaypointList : MonoBehaviour
             listOfWaypoints.Add(item);
         }
     }
-
     public List<Waypoint> ReturnListOfWayPoints()
     {
         return this.listOfWaypoints;
