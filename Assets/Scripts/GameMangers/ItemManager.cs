@@ -223,7 +223,7 @@ public class ItemManager : MonoBehaviour
             int health = GameManager.instance.playerHealth;
             int valueHealth = Mathf.Clamp(health += item.healthIncrease, 0, 5);
             GameManager.instance.playerHealth = valueHealth;
-            HealthBroker.HealthIsGainedCall();
+            HealthUIBroker.HealthIsGainedCall();
             Debug.Log("Health increased by " + item.healthIncrease + " -- Health is now " + GameManager.instance.playerHealth);
             Inventory.instance.Remove(item);
         }

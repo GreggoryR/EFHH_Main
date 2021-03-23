@@ -14,8 +14,8 @@ public class HealthUIManager : MonoBehaviour
         orange = new Color32(248, 148, 6, 255);
         backgroundColors = new Dictionary<int, Color>() { {0 , Color.red }, { 1, Color.red }, { 2, orange }, { 3, Color.yellow }, { 4, Color.green }, { 5, Color.blue } };
         backgroundColor.color = Color.blue;
-        HealthBroker.HealthIsGained += HealthIsGained;
-        HealthBroker.HealthIsLost += HealthIsLost;
+        HealthUIBroker.HealthIsGained += HealthIsGained;
+        HealthUIBroker.HealthIsLost += HealthIsLost;
     }
 
     public void HealthIsLost()

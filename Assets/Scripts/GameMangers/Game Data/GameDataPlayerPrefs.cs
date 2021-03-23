@@ -1,6 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: GameDataPlayerPrefs.cs
+//Author : Greggory Reed
+//Description : Class for storing save data -- NOT SURE IF WILL USE -- BUT WORKS
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 
 [System.Serializable]
@@ -52,13 +55,11 @@ public class GameDataPlayerPrefs : MonoBehaviour
         GameManager.instance.chapter = PlayerPrefs.GetInt("chapter");
         Debug.Log(PlayerPrefs.GetInt("chapter"));
         GameManager.instance.chapter = PlayerPrefs.GetInt("chapter");
-
         GameManager.instance.playerHealth = PlayerPrefs.GetInt("health");
         LoadCharacterStoryPoints();
         //load item checks
         //load story moment checks
         LevelLoaderManager.instance.LoadScene(GameManager.instance.chapter + 1);//quick fix, will need to change later
-        
     }
 
     private void LoadCharacterStoryPoints()

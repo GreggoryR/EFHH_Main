@@ -1,14 +1,11 @@
+///////////////////////////////////////////////////////////////////////////
+//FileName: NotificationBrokerr.cs
+//Author : Greggory Reed
+//Description : Publisher/Subscriber Broker for game notifications
+////////////////////////////////////////////////////////////////////////////
+
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
-
-
-//PUBLISHER / SUBSCRIBER NOTIFICATIONS
-//<summary>
-//<para> This will handle the publishing and subscribing of the notifications </para>
-//</summary>
 public class NotificationBroker 
 {
     public static event Action GameStartBegins; //subscribers subscribe to the action
@@ -20,8 +17,8 @@ public class NotificationBroker
         }
     }
 
-    public static event Action NewChapterBegins; //subscribers subscribe to the action
-    public static void NewChapterBeginsCall() //this method is called by the publisher
+    public static event Action NewChapterBegins;
+    public static void NewChapterBeginsCall()
     {
         if (NewChapterBegins != null)
         {

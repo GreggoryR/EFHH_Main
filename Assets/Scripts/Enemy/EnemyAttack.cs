@@ -50,7 +50,7 @@ public class EnemyAttack : MonoBehaviour
     private void RemoveHealth()
     {
         GameManager.instance.playerHealth--;
-        HealthBroker.HealthIsLostCall();
+        HealthUIBroker.HealthIsLostCall();
         if (GameManager.instance.playerHealth == 0)
         {
             Debug.Log("Remove one health -- Health is " + GameManager.instance.playerHealth);
