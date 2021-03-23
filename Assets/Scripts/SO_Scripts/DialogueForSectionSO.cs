@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DialogueForSection", menuName = "DialogueForSection")]
-public class DialogueForSection : ScriptableObject
+public class DialogueForSectionSO : ScriptableObject
 {
     [Header("Where the dialogue goes")]
     public string sectionName = "Name";

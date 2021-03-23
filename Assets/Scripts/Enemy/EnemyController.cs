@@ -1,4 +1,9 @@
-using System;
+///////////////////////////////////////////////////////////////////////////
+//FileName: EnemyController.cs
+//Author : Greggory Reed
+//Description : Class for moving enemy with A*Pathfinding Project and more
+////////////////////////////////////////////////////////////////////////////
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,8 +37,8 @@ public class EnemyController : MonoBehaviour
     [Space]
 
     [Header("Movement")]
-    public float directionX = 0; //less that right, more than left
-    public float directionY = 0; //less that up, more than down
+    public float directionX = 0; //less than right, more than left
+    public float directionY = 0; //less than up, more than down
     public float xValue = 0;
     public float yValue = 0;
     public float steerX;
@@ -46,10 +51,6 @@ public class EnemyController : MonoBehaviour
     [Header("Radar")]
     [SerializeField] GameObject raderObject;
 
-    private void Awake()
-    {
-
-    }
     private void Start()
     {
         currentWaypoint = 0;
@@ -59,8 +60,6 @@ public class EnemyController : MonoBehaviour
         //EnterExitBroker.PlayerEntersBuilding += RadarCheckEnter; observer pattern example
         //EnterExitBroker.PlayerExitsBuilding += RadarCheckExit;
     }
-
-   
 
     private void Update()
     {
@@ -73,13 +72,19 @@ public class EnemyController : MonoBehaviour
                 stunInProgress = false;
             }
         }
+        CalculateEnemyMovement();
+        animator.SetFloat("Horizontal", xValue);
+        animator.SetFloat("Vertical", yValue);
+        animator.SetFloat("Magnitude", enemyMagnitude);
 
+    }
+
+    private void CalculateEnemyMovement()
+    {
         steerX = aiDestinationSetter.target.transform.position.x;
         steerY = aiDestinationSetter.target.transform.position.y;
         offsetX = transform.position.x - steerX;
         offsetY = transform.position.y - steerY;
-
-
 
         if (offsetX > -.9 && offsetX < .9)
         {
@@ -119,11 +124,6 @@ public class EnemyController : MonoBehaviour
         {
             enemyMagnitude = transform.position.magnitude;
         }
-
-        animator.SetFloat("Horizontal", xValue);
-        animator.SetFloat("Vertical", yValue);
-        animator.SetFloat("Magnitude", enemyMagnitude);
-
     }
 
     IEnumerator GetStunned()
@@ -154,7 +154,6 @@ public class EnemyController : MonoBehaviour
             }
             aiDestinationSetter.target = individualRoute[currentWaypoint].transform;
         }
-
     }
 
     public void GenerateDestination()

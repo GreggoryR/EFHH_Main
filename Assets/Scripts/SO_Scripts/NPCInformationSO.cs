@@ -6,7 +6,7 @@ using UnityEngine;
 public class NPCInformationSO : ScriptableObject
 {
     public string characterName = "name";
-    public DialogueFrame story;
+    public DialogueFrameSO story;
     public bool givenItem = false;
     public List<StoryItemThanks> itemThanks;
 

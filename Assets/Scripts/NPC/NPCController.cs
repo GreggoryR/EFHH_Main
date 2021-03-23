@@ -99,10 +99,10 @@ public class NPCController : MonoBehaviour
         //check place in story // game manager
         int currentChapter = GameManager.instance.chapter;
         //pull dialogue info from character based on the chapter
-        DialogueSections characterDialogue = npcInfo.story.storyDialogues[currentChapter];
+        DialogueSectionsSO characterDialogue = npcInfo.story.storyDialogues[currentChapter];
         //pull the character dialogue based on where they are in the chapter
         int characterSection = StoryManager.instance.GetCharacterSection(npcInfo.characterName);
-        DialogueForSection dialogueForSection =  characterDialogue.sectionDialogues[characterSection];
+        DialogueForSectionSO dialogueForSection =  characterDialogue.sectionDialogues[characterSection];
         return dialogueForSection.storyDialoguesForSection;
     }
 

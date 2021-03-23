@@ -1,6 +1,11 @@
-using System;
+///////////////////////////////////////////////////////////////////////////
+//FileName: EnemyAttack.cs
+//Author : Greggory Reed
+//Description : Class for allowing enemy to attack and deal damage to player
+////////////////////////////////////////////////////////////////////////////
+
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,16 +14,7 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] Image healthImage;
     bool canAttack;
     bool attckInProgress = false;
-    void Start()
-    {
-        //health.text = GameManager.instance.playerHealth.ToString();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerReceiveDamage") && GameManager.instance.beingChased)
@@ -30,7 +26,6 @@ public class EnemyAttack : MonoBehaviour
             }
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerReceiveDamage"))
@@ -40,7 +35,6 @@ public class EnemyAttack : MonoBehaviour
             attckInProgress = false;
         }
     }
-
     IEnumerator AttackPlayer()
     {
         attckInProgress = true;
@@ -51,11 +45,8 @@ public class EnemyAttack : MonoBehaviour
             {
                 RemoveHealth();
             }
-
-                
         }
     }
-
     private void RemoveHealth()
     {
         GameManager.instance.playerHealth--;
