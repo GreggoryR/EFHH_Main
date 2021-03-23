@@ -1,6 +1,10 @@
-using System;
+///////////////////////////////////////////////////////////////////////////
+//FileName: FadeManager.cs
+//Author : Greggory Reed
+//Description : A simple fade mechanism
+///////////////////////////////////////////////////////////////////////////
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FadeManager : MonoBehaviour
@@ -12,16 +16,9 @@ public class FadeManager : MonoBehaviour
         GetFound();
         StartCoroutine(FadeInAndLoad());
     }
-
     private void GetFound()
     {
         LevelLoaderManager parent = FindObjectOfType<LevelLoaderManager>().gameObject.GetComponent<LevelLoaderManager>();
-
-    }
-
-    void Update()
-    {
-        
     }
     IEnumerator FadeInAndLoad()
     {
@@ -29,18 +26,14 @@ public class FadeManager : MonoBehaviour
         yield return new WaitForSeconds(4f);
         fadeCanvas.SetActive(false);
     }
-
     public void FadeOut()
     {
         StartCoroutine(FadeOutAndLoad());
     }
-
     IEnumerator FadeOutAndLoad()
     {
         fadeCanvas.SetActive(true);
         fadeAni.Play("FadeOut");
         yield return null;
     }
-
-
 }

@@ -1,5 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: EnterBuildingManager.cs
+//Author : Greggory Reed
+//Description : Will updated environment and radar when entering the building
+///////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 
 public class EnterBuildingManager : MonoBehaviour
@@ -7,7 +11,6 @@ public class EnterBuildingManager : MonoBehaviour
     [SerializeField] GameObject roofFade;
     [SerializeField] GameObject outsideFade;
     [SerializeField] GameObject exitTransform;
-
 
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -18,7 +21,6 @@ public class EnterBuildingManager : MonoBehaviour
             outsideFade.GetComponent<SpriteRenderer>().sortingLayerName = "Infront_All";
             exitTransform.SetActive(true);
             gameObject.SetActive(false);
-
         }
     }
 }

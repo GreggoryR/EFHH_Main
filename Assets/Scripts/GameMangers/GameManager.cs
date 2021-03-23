@@ -1,9 +1,14 @@
-﻿using System;
-using System.Collections;
+﻿///////////////////////////////////////////////////////////////////////////
+//FileName: GameManager.cs
+//Author : Greggory Reed
+//Description : Singleton Pattern--Found in many managers
+//              GameManager stores basic information
+//              that needs to be persisted from lvl to lvl
+///////////////////////////////////////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -118,12 +123,10 @@ public class GameManager : MonoBehaviour
     {
         location = Location.first;
     }
-
     public void GameOver()
     {
         Debug.Log("Game Over");
     }
-
     public void StopChasing()
     {
         if (onNotChasingAnymore != null && beingChased)

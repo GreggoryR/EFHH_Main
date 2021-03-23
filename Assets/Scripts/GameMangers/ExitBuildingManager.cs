@@ -1,5 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: ExitBuildingManager.cs
+//Author : Greggory Reed
+//Description : Will updated environment and radar when exiting the building
+///////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 
 public class ExitBuildingManager : MonoBehaviour

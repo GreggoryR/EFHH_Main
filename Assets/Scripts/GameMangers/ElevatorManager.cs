@@ -1,6 +1,10 @@
-using System;
+///////////////////////////////////////////////////////////////////////////
+//FileName: ElevatorManager.cs
+//Author : Greggory Reed
+//Description : Will handle the elevator transitions and keypad 
+////////////////////////////////////////////////////////////////////////////
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -16,21 +20,17 @@ public class ElevatorManager : MonoBehaviour
     [SerializeField] BoxCollider2D elevatorBlocker;
     [SerializeField] BoxCollider2D elevatorFloorTransfer;
 
-    
     void Start()
     {
         keyPadComponent = keyPadParentGO.GetComponent<ElevatorKeypad>();
         keyPadComponent.KeyPadDelegate += OpenElevator;
     }
-
     private void OpenElevator()
     {
         elevatorBlocker.enabled = false;
         unlocked = true;
         elevatorFloorTransfer.enabled = true;
     }
-
-
     void Update()
     {
         if (canUseKeypad && keyPadHidden && Input.GetKeyDown(KeyCode.E))
@@ -39,7 +39,6 @@ public class ElevatorManager : MonoBehaviour
             keyPadHidden = false;
         }
     }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         canUseKeypad = true;
@@ -51,10 +50,7 @@ public class ElevatorManager : MonoBehaviour
                 StartCoroutine(MoveToBasement());
             }
         }
-
-
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("PlayerFoundCollider"))
@@ -69,14 +65,9 @@ public class ElevatorManager : MonoBehaviour
             inElavator = false;
         }
         }
-        
     }
-
-   
-
     IEnumerator MoveToBasement()
     {
-
         yield return new WaitForSeconds(2f);
         string sceneName = SceneManager.GetActiveScene().name;
         if (inElavator && sceneName.Contains("Floor"))

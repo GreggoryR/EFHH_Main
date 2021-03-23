@@ -1,6 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: DoorManager.cs
+//Author : Greggory Reed
+//Description : Will handle unlocking and opening doors based on the level
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 
 public class DoorManager : MonoBehaviour
@@ -43,7 +46,6 @@ public class DoorManager : MonoBehaviour
         }
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -51,7 +53,6 @@ public class DoorManager : MonoBehaviour
             playerIsNextToDoor = true;
         } 
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -84,11 +85,8 @@ public class DoorManager : MonoBehaviour
                     break;
             }
         }
-        
         //move collider for the animation?
         //play animation
         //on animaton exit, destroy collider
     }
-
-
 }

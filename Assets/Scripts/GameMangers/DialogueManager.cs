@@ -1,5 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿///////////////////////////////////////////////////////////////////////////
+//FileName: DialogueManager.cs
+//Author : Greggory Reed
+//Description : Will update UI with dialogue information
+////////////////////////////////////////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,8 +38,6 @@ public class DialogueManager : MonoBehaviour
         }
         sentences = new Queue<string>();
     }
-
-
     public void StartCoversation(string[] chapterSectionDialogue, string name, bool isNextChapter)
     {
         nameText.text = name;
@@ -49,8 +51,6 @@ public class DialogueManager : MonoBehaviour
         string firstSentence = sentences.Dequeue();
         dialogueText.text = firstSentence;
     }
-
-
     public void DisplayNextSentence()
     {
         if(sentences.Count == 0 && !isGiftDialogue)
@@ -66,7 +66,6 @@ public class DialogueManager : MonoBehaviour
         string sentence = sentences.Dequeue();
         dialogueText.text = sentence;
     }
-
     private void EndDialogue()
     {
         GameManager.instance.isTalking = false;
@@ -74,7 +73,6 @@ public class DialogueManager : MonoBehaviour
         ui_Dialogue.SetActive(false);
         onDialogueFinished.Invoke();
     }
-
     public void StartGiftCoversation(string[] message, string name, string itemMessage, bool isNextChapter)
     {
         NotificationManager.instance.message = itemMessage;
@@ -98,7 +96,5 @@ public class DialogueManager : MonoBehaviour
         ui_Dialogue.SetActive(false);
         NotificationBroker.ItemRecievedFromNPCCall();
         //onDialogueFinished.Invoke();
-        
     }
-
 }

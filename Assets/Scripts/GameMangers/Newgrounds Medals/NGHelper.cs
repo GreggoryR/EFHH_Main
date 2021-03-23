@@ -1,5 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: NGHelper.cs
+//Author : Newgrounds.io
+//Description : Helps communicate with NG servers 
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 
 public class NGHelper : MonoBehaviour

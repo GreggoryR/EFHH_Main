@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: AnimationAudioManager.cs
+//Author : Greggory Reed
+//Description : Helps sync animations with correct audio sounds
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 
 public class AnimationAudioManager : MonoBehaviour
-{ 
-    //hello github
-    //hello desktop
+{
     public enum CurrentMovement { Right, Left, Up, Down};
     public void PlayerHorizontalStepTaken()
     {
-
         switch (GameManager.instance.location)
         {
             case GameManager.Location.first:
@@ -22,7 +23,6 @@ public class AnimationAudioManager : MonoBehaviour
             default:
                 break;
         }
-        
     }
     public void PlayerVerticalStepTaken()
     {

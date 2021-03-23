@@ -1,4 +1,9 @@
-using System.Collections;
+///////////////////////////////////////////////////////////////////////////
+//FileName: HealthUIManager.cs
+//Author : Greggory Reed
+//Description : Will updated the health UI based on the publisher
+///////////////////////////////////////////////////////////////////////////
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

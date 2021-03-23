@@ -1,5 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿///////////////////////////////////////////////////////////////////////////
+//FileName: ItemManager.cs
+//Author : Greggory Reed
+//Description : Items are connected to story moments
+//              Give items to NPCs, Recieve items
+//              Sometimes dialogue is triggered
+//              Sometimes level is completed
+///////////////////////////////////////////////////////////////////////////
+
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
