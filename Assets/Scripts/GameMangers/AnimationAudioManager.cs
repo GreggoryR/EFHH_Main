@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationAudioSync : MonoBehaviour
+public class AnimationAudioManager : MonoBehaviour
 { 
     //hello github
     //hello desktop

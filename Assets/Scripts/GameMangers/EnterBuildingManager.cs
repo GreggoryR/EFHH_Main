@@ -2,21 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExitTransform : MonoBehaviour
+public class EnterBuildingManager : MonoBehaviour
 {
     [SerializeField] GameObject roofFade;
     [SerializeField] GameObject outsideFade;
-    [SerializeField] GameObject enterTransform;
+    [SerializeField] GameObject exitTransform;
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            EnterExitBroker.PlayerExitsBuildingFunction();
-            roofFade.SetActive(true);
-            outsideFade.GetComponent<SpriteRenderer>().sortingLayerName = "Behind_All";
-            enterTransform.SetActive(true);
+            EnterExitBroker.PlayerEntersBuildingFunction();
+            roofFade.SetActive(false);
+            outsideFade.GetComponent<SpriteRenderer>().sortingLayerName = "Infront_All";
+            exitTransform.SetActive(true);
             gameObject.SetActive(false);
+
         }
     }
 }
