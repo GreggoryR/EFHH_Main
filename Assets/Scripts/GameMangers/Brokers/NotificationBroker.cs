@@ -8,40 +8,57 @@ using System;
 
 public class NotificationBroker 
 {
-    public static event Action GameStartBegins; //subscribers subscribe to the action
-    public static void GameStartBeginsCall() //this method is called by the publisher
+    public delegate void GameStartBegins(MessageSO message); //subscribers subscribe
+    public static event GameStartBegins gameStartBegins;
+    public static void GameStartBeginsCall(MessageSO message) //this method is called by the publisher
     {
-        if (GameStartBegins != null)
+        if (gameStartBegins != null)
         {
-            GameStartBegins();
+            gameStartBegins(message);
         }
     }
 
-    public static event Action NewChapterBegins;
-    public static void NewChapterBeginsCall()
+
+    public delegate void NewChapterBegins(MessageSO message); //subscribers subscribe
+    public static event NewChapterBegins newChapterBegins;
+    public static void NewChapterBeginsCall(MessageSO message)
     {
-        if (NewChapterBegins != null)
+        if (newChapterBegins != null)
         {
-            NewChapterBegins();
+            newChapterBegins(message);
         }
     }
 
-    public static event Action ItemRecievedFromNPC;
-    public static void ItemRecievedFromNPCCall() 
+    public delegate void ItemRecievedFromNPC(MessageSO message); //subscribers subscribe
+    public static event ItemRecievedFromNPC itemRecievedFromNPC;
+    public static void ItemRecievedFromNPCCall(MessageSO message) 
     {
-        if (ItemRecievedFromNPC != null)
+        if (itemRecievedFromNPC != null)
         {
-            ItemRecievedFromNPC();
+            itemRecievedFromNPC(message);
         }
     }
 
-    public static event Action DoorIsLocked;
-    public static void DoorIsLockedCall()
+    public delegate void DoorIsLocked(MessageSO message); //subscribers subscribe
+    public static event DoorIsLocked doorIsLocked;
+    public static void DoorIsLockedCall(MessageSO message)
     {
-        if (DoorIsLocked != null)
+        if (doorIsLocked != null)
         {
-            DoorIsLocked();
+            doorIsLocked(message);
         }
     }
+
+    public delegate void TurnOffButtons(); //subscribers subscribe
+    public static event TurnOffButtons turnOffButtons;
+    public static void TurnOffButtonsCall()
+    {
+        if (turnOffButtons != null)
+        {
+            turnOffButtons();
+        }
+    }
+
+
 
 }

@@ -21,6 +21,6 @@ MonoBehaviour:
   inventoryIcon: {fileID: 21300000, guid: fb762d3f36aeb5a4faeaa7ec2307e3ce, type: 3}
   inventorySelectedIcon: {fileID: 21300000, guid: 9f5295285e67f54478ebf49dfafbcff1,
     type: 3}
-  recieveMessage: 'You just recieved the '
+  recieveMessage: {fileID: 11400000, guid: 91e4256f2e9c633418912661050e74d7, type: 2}
   itemThanks: 
   itemInReturn: OliverOxygen

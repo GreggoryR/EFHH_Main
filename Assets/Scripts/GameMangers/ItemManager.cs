@@ -50,6 +50,7 @@ public class ItemManager : MonoBehaviour
     {
         if (GameManager.instance.nextToNPC && item.itemFor.Equals(GameManager.instance.currentNPC.characterName))
         {
+            GameManager.instance.canMove = false;
             GameManager.instance.isTalking = true;
             GameManager.instance.StopChasing();
             Debug.Log("Giving the item to " + item.itemFor);
@@ -166,8 +167,7 @@ public class ItemManager : MonoBehaviour
     {
         DialogueManager.instance.ui_Inventory.SetActive(false);
         Inventory.instance.AddItem(returnedItem);
-        string recieveNotificationKwan = "You recieved something from " + characterName;
-        DialogueManager.instance.StartGiftCoversation(dialogue, characterName, recieveNotificationKwan, nextChapter);
+        DialogueManager.instance.StartGiftCoversation(dialogue, characterName, returnedItem.recieveMessage, nextChapter);
         DialogueManager.instance.ui_Player.SetActive(true);
         Debug.Log("Recieved gift from " + characterName);
     }

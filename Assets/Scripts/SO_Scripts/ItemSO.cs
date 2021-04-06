@@ -15,7 +15,7 @@ public class ItemSO : ScriptableObject
     public int healthIncrease = 0;
     public Sprite inventoryIcon = null;
     public Sprite inventorySelectedIcon = null;
-    public string recieveMessage = "You just recieved the ";
+    public MessageSO recieveMessage;
     public string itemThanks = "";
     public string itemInReturn = "";
 

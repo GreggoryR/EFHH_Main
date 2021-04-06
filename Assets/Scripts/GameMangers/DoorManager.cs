@@ -5,9 +5,12 @@
 ////////////////////////////////////////////////////////////////////////////
 
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class DoorManager : MonoBehaviour
 {
+    [SerializeField] GameObject playerButtonCanvas;
+
     [SerializeField] Material[] doorRadarColors;
     [SerializeField] GameObject doorRadar;
     BoxCollider2D doorCollider;
@@ -18,10 +21,13 @@ public class DoorManager : MonoBehaviour
     enum DoorLocked {locked, unlocked};
     [SerializeField] DoorLocked doorLocked;
 
+    [SerializeField] GameObject doorLight;
+
     //Top Hallway Transition
     [SerializeField] GameObject topHallwayRoof;
     [SerializeField] GameObject topHallwayRadar;
 
+    [SerializeField] MessageSO doorIsLockedMessage;
 
     public void Start()
     {
@@ -51,6 +57,10 @@ public class DoorManager : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerIsNextToDoor = true;
+            if (!doorIsLocked)
+            {
+                playerButtonCanvas.SetActive(true);
+            }
         } 
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -58,6 +68,10 @@ public class DoorManager : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             playerIsNextToDoor = false;
+            if (!doorIsLocked)
+            {
+                playerButtonCanvas.SetActive(false);
+            }
         }
     }
     private void TryToOpenDoor()
@@ -67,19 +81,57 @@ public class DoorManager : MonoBehaviour
             switch (doorType)
             {
                 case DoorType.topHallway:
-                    doorCollider.enabled = false;
-                    topHallwayRoof.SetActive(false);
-                    topHallwayRadar.SetActive(true);
+                    switch (doorLocked)
+                    {
+                        case DoorLocked.locked:
+                            NotificationBroker.DoorIsLockedCall(doorIsLockedMessage);
+                            break;
+                        case DoorLocked.unlocked:
+                            doorCollider.enabled = false;
+                            topHallwayRoof.SetActive(false);
+                            topHallwayRadar.SetActive(true);
+                            playerButtonCanvas.SetActive(false);
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case DoorType.entrance:
+                    playerButtonCanvas.SetActive(false);
                     break;
                 case DoorType.garden:
+                    switch (doorLocked)
+                    {
+                        case DoorLocked.locked:
+                            NotificationBroker.DoorIsLockedCall(new MessageSO { message = "Door is locked" });
+                            break;
+                        case DoorLocked.unlocked:
+                            doorCollider.enabled = false;
+                            playerButtonCanvas.SetActive(false);
+                            doorLight.SetActive(true);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
                     break;
                 case DoorType.bedroom:
-                    //implement other stuff
-                    doorCollider.enabled = false;
+                    switch (doorLocked)
+                    {
+                        case DoorLocked.locked:
+                            NotificationBroker.DoorIsLockedCall(new MessageSO { message = "Door is locked" });
+                            break;
+                        case DoorLocked.unlocked:
+                            doorCollider.enabled = false;
+                            playerButtonCanvas.SetActive(false);
+                            doorLight.SetActive(true);
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 case DoorType.ayako:
+                    playerButtonCanvas.SetActive(false);
                     break;
                 default:
                     break;

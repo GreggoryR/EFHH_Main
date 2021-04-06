@@ -23,6 +23,12 @@ public class HealthUIManager : MonoBehaviour
         HealthUIBroker.HealthIsLost += HealthIsLost;
     }
 
+    private void OnDestroy()
+    {
+        HealthUIBroker.HealthIsGained -= HealthIsGained;
+        HealthUIBroker.HealthIsLost -= HealthIsLost;
+    }
+
     public void HealthIsLost()
     {
         backgroundColors.TryGetValue(GameManager.instance.playerHealth, out Color colorChange);

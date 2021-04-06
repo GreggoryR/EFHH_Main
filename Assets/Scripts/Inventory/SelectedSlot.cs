@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
 public class SelectedSlot : MonoBehaviour
 {
     ItemSO item;
     public Image icon;
+
+    
 
     public void AddItem(ItemSO newItem)
     {
@@ -31,6 +35,7 @@ public class SelectedSlot : MonoBehaviour
         switch (item.itemType)
         {
             case ItemType.NPC:
+                NotificationBroker.TurnOffButtonsCall();
                 ItemManager.instance.ReturnItem(item);
                 break;
             case ItemType.HEALTH:

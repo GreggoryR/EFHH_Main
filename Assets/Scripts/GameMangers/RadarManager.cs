@@ -14,7 +14,13 @@ public class RadarManager : MonoBehaviour
         EnterExitBroker.PlayerExitsBuilding += ChangeRaderMaskExit;
     }
 
- 
+    private void OnDestroy()
+    {
+        EnterExitBroker.PlayerEntersBuilding -= ChangeRaderMaskEnter;
+        EnterExitBroker.PlayerExitsBuilding -= ChangeRaderMaskExit;
+    }
+
+
     private void ChangeRaderMaskEnter()
     {
         radarCam.cullingMask = LayerMask.GetMask("Radar");

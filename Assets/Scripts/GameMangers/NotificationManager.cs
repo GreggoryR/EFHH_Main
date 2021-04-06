@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class NotificationManager : MonoBehaviour
 {
-    public static NotificationManager instance;
     //Game Start
     [SerializeField] GameObject gameStartNotifcaton;
     [SerializeField] GameObject gameStartText;
@@ -24,77 +24,107 @@ public class NotificationManager : MonoBehaviour
     ActiveNotification activeNotication;
 
 
-    [SerializeField] public static bool notificationIsOpen = false;
+    [SerializeField] public bool notificationIsOpen = false;
     public GameObject inventoryUIButton;
 
     public string message;
 
-    public delegate void OnResumeClicked();
-    public OnResumeClicked onResumeClicked;
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        NotificationBroker.gameStartBegins += GameStartNotification;
+        NotificationBroker.newChapterBegins += NewChapterNotification;
+        NotificationBroker.itemRecievedFromNPC += RecieveItemNotification;
+        NotificationBroker.doorIsLocked += DoorLockedNotification;
     }
 
     void Start()
     {
         message = "";
         //DialogueManager.instance.onDialogueFinished += ActivateNotifcationCallback; //onDialogueFinished
-        NotificationBroker.GameStartBegins += ActivateGameStartNotification;
-        NotificationBroker.ItemRecievedFromNPC += ActivateRecieveItemNotification;
-        NotificationBroker.DoorIsLocked += ActivateDoorLockedNotification;
-        NotificationBroker.NewChapterBegins += ActivateNewChapterNotification;
+        
+        
+        
     }
 
-    private void ActivateNewChapterNotification()
+    private void GameStartNotification(MessageSO message)
     {
-        throw new NotImplementedException();
+        if (!notificationIsOpen)
+        {
+            activeNotication = ActiveNotification.gameStart;
+            BeginNotification(ActiveNotification.gameStart, message);
+        }
     }
 
-    private void ActivateDoorLockedNotification()
+
+    private void NewChapterNotification(MessageSO message)
     {
-        throw new NotImplementedException();
+        if (!notificationIsOpen)
+        {
+            activeNotication = ActiveNotification.chapterStart;
+            BeginNotification(ActiveNotification.chapterStart, message);
+            
+        }
     }
 
-    private void ActivateGameStartNotification()
+    IEnumerator Wait()
     {
-        throw new NotImplementedException();
+        yield return new WaitForSeconds(10f);
+        
+
     }
 
-    private void ActivateRecieveItemNotification()
+    private void DoorLockedNotification(MessageSO message)
+    {
+        if (!notificationIsOpen)
+        {
+            activeNotication = ActiveNotification.doorLocked;
+            BeginNotification(ActiveNotification.doorLocked, message);
+        }
+    }
+    private void RecieveItemNotification(MessageSO message)
     {
         if (!notificationIsOpen)
         {
             activeNotication = ActiveNotification.receiveItem;
-            recieveItemNotifcaton.SetActive(true);
-            GameManager.instance.isTalking = true;
-            GameManager.instance.canMove = false;
-            recieveItemText.GetComponent<Text>().text = message;
-            //Time.timeScale = 0;
-            notificationIsOpen = true;
+            BeginNotification(ActiveNotification.doorLocked, message);
+            //activeNotication = ActiveNotification.receiveItem;
+            //recieveItemNotifcaton.SetActive(true);
+            //GameManager.instance.isTalking = true;
+            //GameManager.instance.canMove = false;
+            //recieveItemText.GetComponent<Text>().text = message.message;
+            ////Time.timeScale = 0;
+            //notificationIsOpen = true;
         }
-       
     }
 
-    //public void ActivateNotifcationUI()
-    //{
-    //    if (!notificationIsOpen)
-    //    {
-    //        Resume();
-    //    }
-    //    else
-    //    {
-    //        Pause();
-    //    }
-    //}
+    private void BeginNotification(ActiveNotification version, MessageSO message)
+    {
+        GameManager.instance.isTalking = true;
+        GameManager.instance.canMove = false;
+        switch (version)
+        {
+            case ActiveNotification.gameStart:
+                gameStartNotifcaton.SetActive(true);
+                gameStartText.GetComponent<TMP_Text>().text = message.message;
+                break;
+            case ActiveNotification.chapterStart:
+                chapterStartNotifcaton.SetActive(true);
+                chapterStartText.GetComponent<Text>().text = message.message;
+                break;
+            case ActiveNotification.doorLocked:
+                doorLockedNotifcaton.SetActive(true);
+                doorLockText.GetComponent<Text>().text = message.message;
+                break;
+            case ActiveNotification.receiveItem:
+                recieveItemNotifcaton.SetActive(true);
+                recieveItemText.GetComponent<Text>().text = message.message;
+                break;
+            default:
+                break;
+        }
+        notificationIsOpen = true;
+    }
 
     public void Resume()
     {
@@ -137,5 +167,13 @@ public class NotificationManager : MonoBehaviour
         {
             LevelLoaderManager.instance.GetComponent<LevelLoaderManager>().LoadNextLevel(); // music fade, screen fade, and load level occurs here
         }
+    }
+
+    private void OnDestroy()
+    {
+        NotificationBroker.gameStartBegins -= GameStartNotification;
+        NotificationBroker.newChapterBegins -= NewChapterNotification;
+        NotificationBroker.itemRecievedFromNPC -= RecieveItemNotification;
+        NotificationBroker.doorIsLocked -= DoorLockedNotification;
     }
 }

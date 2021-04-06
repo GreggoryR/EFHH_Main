@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Music Collection
   m_EditorClassIdentifier: 
   intro: {fileID: 8300000, guid: 19c4d1719717f994fb760c99a63d3ab3, type: 3}
-  chapter0: {fileID: 8300000, guid: f6260e52e8bb53446a17ab30e6bc900e, type: 3}
-  chapter1: {fileID: 8300000, guid: f6260e52e8bb53446a17ab30e6bc900e, type: 3}
-  chapter2: {fileID: 8300000, guid: f6260e52e8bb53446a17ab30e6bc900e, type: 3}
+  chapter0: {fileID: 8300000, guid: 19c4d1719717f994fb760c99a63d3ab3, type: 3}
+  chapter1: {fileID: 8300000, guid: f6e17160fc067964fa08a4c5b9b24734, type: 3}
+  chapter2: {fileID: 8300000, guid: c8bcc4342aca49446a3660e5018db9eb, type: 3}
   chapter3: {fileID: 8300000, guid: f6260e52e8bb53446a17ab30e6bc900e, type: 3}
   chapter4: {fileID: 8300000, guid: f6260e52e8bb53446a17ab30e6bc900e, type: 3}
   chapter5: {fileID: 8300000, guid: f6260e52e8bb53446a17ab30e6bc900e, type: 3}

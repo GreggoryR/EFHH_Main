@@ -9,6 +9,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -48,7 +49,7 @@ public class GameManager : MonoBehaviour
     #region Player
     public readonly int playerMaxHealth = 5;
     [SerializeField] public int playerHealth = 5;
-    [HideInInspector] public bool canMove = true;
+    public bool canMove = true;
     [HideInInspector] public bool isTalking = false;
     [HideInInspector] public bool beingChased = false;
     [SerializeField] public bool talkedToAfua;
@@ -119,9 +120,20 @@ public class GameManager : MonoBehaviour
     //100 Points - Be a Friend(hint: it's okay just be present sometimes) - (will unlock if they stand next to Kwan for 60 seconds without talking or moving)
     #endregion
 
+    #region DEV
+    [SerializeField] Text info1;
+    [SerializeField] Text info2;
+    [SerializeField] Text info3;
+    [SerializeField] Text info4;
+    [SerializeField] Text info5;
+    [SerializeField] Text info6;
+    #endregion
+
     public void Start()
     {
         location = Location.first;
+
+
     }
     public void GameOver()
     {

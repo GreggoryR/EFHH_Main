@@ -6,17 +6,25 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+
     [SerializeField] SoundSO soundSO;
     [SerializeField] AudioSource ui_AudioSource;
     [SerializeField] AudioSource playerWalk_AudioSource;
     [SerializeField] AudioSource playerAction_AudioSource;
     [SerializeField] AudioSource playerSound_AudioSource;
 
+
     void Start()
     {
         SoundBroker.onUISoundPlayed += UISoundPlayed;
         SoundBroker.onPlayerSoundPlayed += PlayerSoundPlayed;
     }
+    private void OnDestroy()
+    {
+        SoundBroker.onUISoundPlayed -= UISoundPlayed;
+        SoundBroker.onPlayerSoundPlayed -= PlayerSoundPlayed;
+    }
+
 
     public void UISoundPlayed(UI_Sounds ui_Sound)
     {
@@ -116,4 +124,6 @@ public class SoundManager : MonoBehaviour
                 break;
         }
     }
+
+    
 }

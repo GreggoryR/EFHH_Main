@@ -37,12 +37,12 @@ public class MusicManager : MonoBehaviour
         else if(SceneManager.GetActiveScene().buildIndex == 1)
         {
             currentSongNum = Songs.title;
-            musicSource.clip = musicCollection.intro;
+            musicSource.clip = musicCollection.chapter0;
         }
         else if (SceneManager.GetActiveScene().buildIndex == 2)
         {
             currentSongNum = Songs.title;
-            musicSource.clip = musicCollection.intro;
+            musicSource.clip = musicCollection.chapter1;
         }
         else if (SceneManager.GetActiveScene().name.Equals("Chapter_3_Basement"))
         {

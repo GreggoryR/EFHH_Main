@@ -9,20 +9,24 @@ public class NPCController : MonoBehaviour
     [SerializeField] NPCInformationSO npcInfo;
     [SerializeField] GameObject npcIntroduction;
     bool hasMet = false;
-    
+    [SerializeField] GameObject playerButtonCanvas;
 
-    
+
+    public void Start()
+    {
+        NotificationBroker.turnOffButtons += TurnOffPlayerButton;
+    }
+    private void OnDestroy()
+    {
+        NotificationBroker.turnOffButtons -= TurnOffPlayerButton;
+    }
 
     public void Update()
     {
         if (canInteract && Input.GetKeyDown(KeyCode.E) && !GameManager.instance.isTalking)
         {
-            if (GameManager.instance.beingChased)
-            {
-                GameManager.instance.beingChased = false;
-                GameManager.instance.StopChasing();
-            }
             GameManager.instance.canMove = false;
+            playerButtonCanvas.SetActive(false);
             if (!hasMet)
             {
                 StartCoroutine(IntroAndConversation());
@@ -31,9 +35,6 @@ public class NPCController : MonoBehaviour
             {
                 HaveConversation();
             }
-
-            
-            
         }
     }
 
@@ -51,7 +52,9 @@ public class NPCController : MonoBehaviour
         {
             if (npcInfo.characterName.Equals("Ayako") && npcInfo.givenItem && GameManager.instance.talkedToAfua)
             {
+                playerButtonCanvas.SetActive(false);
                 GameManager.instance.isTalking = true;
+                GameManager.instance.beingChased = false;
                 GameManager.instance.StopChasing();
                 string[] chapterSectionDialogue = GetChapterSectionDialogue();
                 ItemManager.instance.residentItemCollection.TryGetValue("ayakoTelescope", out ItemSO ayakoTeleReturnedItem);
@@ -59,8 +62,10 @@ public class NPCController : MonoBehaviour
             } 
             else 
             {
+                playerButtonCanvas.SetActive(false);
                 npcInfo.givenItem = true;
                 GameManager.instance.isTalking = true;
+                GameManager.instance.beingChased = false;
                 GameManager.instance.StopChasing();
                 string[] chapterSectionDialogue = GetChapterSectionDialogue();
                 ItemManager.instance.residentItemCollection.TryGetValue("ayakoNote", out ItemSO ayakoNote);
@@ -69,7 +74,9 @@ public class NPCController : MonoBehaviour
         }
         else if (npcInfo.characterName.Equals("Jose"))
         {
+            playerButtonCanvas.SetActive(false);
             GameManager.instance.isTalking = true;
+            GameManager.instance.beingChased = false;
             GameManager.instance.StopChasing();
             string[] chapterSectionDialogue = GetChapterSectionDialogue();
             ItemManager.instance.residentItemCollection.TryGetValue("joseRope", out ItemSO joseRopeReturnedItem);
@@ -77,7 +84,9 @@ public class NPCController : MonoBehaviour
         }
         else if (npcInfo.characterName.Equals("Kwan"))
         {
+            playerButtonCanvas.SetActive(false);
             GameManager.instance.isTalking = true;
+            GameManager.instance.beingChased = false;
             GameManager.instance.StopChasing();
             string[] chapterSectionDialogue = GetChapterSectionDialogue();
             ItemManager.instance.residentItemCollection.TryGetValue("kwanRose", out ItemSO kwanRoseReturnedItem);
@@ -85,12 +94,13 @@ public class NPCController : MonoBehaviour
         }
         else
         {
+            playerButtonCanvas.SetActive(false);
             GameManager.instance.isTalking = true;
+            GameManager.instance.beingChased = false;
             GameManager.instance.StopChasing();
             string[] chapterSectionDialogue = GetChapterSectionDialogue();
             DialogueManager.instance.StartCoversation(chapterSectionDialogue, npcInfo.characterName, false);
         }
-       
     }
 
 
@@ -113,6 +123,11 @@ public class NPCController : MonoBehaviour
             canInteract = true;
             GameManager.instance.nextToNPC = true;
             GameManager.instance.currentNPC = npcInfo;
+            if (!GameManager.instance.isTalking)
+            {
+                playerButtonCanvas.SetActive(true);
+            }
+            
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -122,7 +137,13 @@ public class NPCController : MonoBehaviour
             canInteract = false;
             GameManager.instance.isTalking = false;
             GameManager.instance.currentNPC = null;
+            playerButtonCanvas.SetActive(false);
         }
         
+    }
+
+    public void TurnOffPlayerButton()
+    {
+        playerButtonCanvas.SetActive(false);
     }
 }

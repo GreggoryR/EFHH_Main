@@ -7,11 +7,12 @@ public class ItemPickup : MonoBehaviour
 {
     public ItemSO itemSO;
     bool canPickUP = false;
-    SpriteRenderer colorRenderer;
+    //SpriteRenderer colorRenderer;
+    [SerializeField] GameObject playerButtonCanvas;
 
     private void Awake()
     {
-        colorRenderer = transform.GetComponentInChildren<SpriteRenderer>();
+        //colorRenderer = transform.GetComponentInChildren<SpriteRenderer>();
     }
     public void Update()
     {
@@ -30,6 +31,7 @@ public class ItemPickup : MonoBehaviour
         {
             SoundBroker.PlayerSoundCall(Player_Sounds.item_Pickup);
             Inventory.instance.hasAdded = true;
+            playerButtonCanvas.SetActive(false);
             Destroy(gameObject);
         }
             
@@ -39,15 +41,17 @@ public class ItemPickup : MonoBehaviour
     {
         if(collision.CompareTag("PlayerFoundCollider") && canPickUP == false)
         {
+            playerButtonCanvas.SetActive(true);
             canPickUP = true;
-            colorRenderer.color = Color.green;
+            //colorRenderer.color = Color.green;
             
         }
        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        colorRenderer.color = Color.white;
+        playerButtonCanvas.SetActive(false);
+        //colorRenderer.color = Color.white;
         canPickUP = false;
 
     }

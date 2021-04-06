@@ -5,18 +5,31 @@
 ////////////////////////////////////////////////////////////////////////////
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BasicMovement : MonoBehaviour
 {
+    //[SerializeField] VariableJoystick joystick; // later
     [SerializeField] float movementSpeed = 5.0f;
     [SerializeField] Rigidbody2D rb;
     public Animator animator;
 
+
+    private void Start()
+    {
+        //if (!SceneManager.GetActiveScene().buildIndex.Equals(1))
+        //{
+        //    GameManager.instance.canMove = true;
+        //}
+    }
     void Update()
     {
         GameManager.instance.playerMoveX = Input.GetAxisRaw("Horizontal");
         GameManager.instance.playerMoveY = Input.GetAxisRaw("Vertical");
         Vector3 movement = new Vector3(GameManager.instance.playerMoveX, GameManager.instance.playerMoveY, 0.0f);
+
+
+        //Vector3 movement = new Vector3(joystick.Horizontal, joystick.Vertical);
 
         if (GameManager.instance.canMove == true)
         {

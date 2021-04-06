@@ -21,6 +21,6 @@ MonoBehaviour:
   inventoryIcon: {fileID: 21300000, guid: c0e58175cfd42514da065aaff76467ca, type: 3}
   inventorySelectedIcon: {fileID: 21300000, guid: 719949a7fae18b34f85c31d39c73db1c,
     type: 3}
-  recieveMessage: 'You just recieved the '
+  recieveMessage: {fileID: 11400000, guid: c64db3eba7229514ca68dd299b946a52, type: 2}
   itemThanks: 
   itemInReturn: BarryWheel

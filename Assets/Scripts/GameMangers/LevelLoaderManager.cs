@@ -40,7 +40,7 @@ public class LevelLoaderManager : MonoBehaviour
     }
     public void LoadNextLevel()
     {
-        if (StoryManager.instance.canLoadNextLevel)
+        if (SceneManager.GetActiveScene().name.Equals("x_StartMenu") || StoryManager.instance.canLoadNextLevel)
         {
             StoryManager.instance.canLoadNextLevel = false;
             GameManager.instance.chapter++;
