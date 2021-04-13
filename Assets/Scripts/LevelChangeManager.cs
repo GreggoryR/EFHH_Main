@@ -1,5 +1,10 @@
+//////////////////////////////////////////////////////////////
+//FileName: LevelChangeManager.cs
+//Author : Greggory Reed
+//Description : Changing levels
+////////////////////////////////////////////////////////////////////////////
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

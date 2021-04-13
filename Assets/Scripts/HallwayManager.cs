@@ -1,5 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+//////////////////////////////////////////////////////////////
+//FileName: HallwayManager.cs
+//Author : Greggory Reed
+//Description : For activating hallways after unlocking a door and more
+////////////////////////////////////////////////////////////////////////////
+///
 using UnityEngine;
 
 public class HallwayManager : MonoBehaviour

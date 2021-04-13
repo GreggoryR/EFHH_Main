@@ -1,5 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+//////////////////////////////////////////////////////////////
+//FileName: VentManager.cs
+//Author : Greggory Reed
+//Description : The vent minigame manager
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 

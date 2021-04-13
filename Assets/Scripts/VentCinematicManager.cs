@@ -1,5 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+//////////////////////////////////////////////////////////////
+//FileName: VentCinematicManager.cs
+//Author : Greggory Reed
+//Description : Plays the cinematic after the vent minigame
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 
 public class VentCinematicManager : MonoBehaviour

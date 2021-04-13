@@ -1,5 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: DontDestroyUI.cs
+//Author : Greggory Reed
+//Description : For UI that needs to stay
+////////////////////////////////////////////////////////////////////////////
+///
 using UnityEngine;
 
 public class DontDestroyUI : MonoBehaviour

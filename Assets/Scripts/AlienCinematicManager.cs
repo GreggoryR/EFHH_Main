@@ -1,5 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: AlienCinematicManager.cs
+//Author : Greggory Reed
+//Description : Manages the alien cinematic
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.Playables;
 

@@ -1,5 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: DevTesting.cs
+//Author : Greggory Reed
+//Description : Testing in Unity for misc. 
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,11 +13,5 @@ public class DevTesting : MonoBehaviour
     void Start()
     {
         text.text = SystemInfo.deviceType.ToString();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
