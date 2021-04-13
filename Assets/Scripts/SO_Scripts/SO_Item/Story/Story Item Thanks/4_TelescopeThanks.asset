@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: 4_TelescopeThanks
   m_EditorClassIdentifier: 
   storyItemName: 
-  thanks: []
+  thanks:
+  - Thanks for finding the telescope.

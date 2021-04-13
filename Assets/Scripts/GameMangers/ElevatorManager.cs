@@ -20,16 +20,52 @@ public class ElevatorManager : MonoBehaviour
     [SerializeField] BoxCollider2D elevatorBlocker;
     [SerializeField] BoxCollider2D elevatorFloorTransfer;
 
+    [SerializeField] GameObject playerButtonCanvas;
+    [SerializeField] Material[] doorRadarColors;
+    [SerializeField] GameObject doorRadar;
+
     void Start()
     {
+        //switch (doorLocked)
+        //{
+        //    case DoorLocked.locked:
+        //        doorRadar.GetComponent<SpriteRenderer>().material = doorRadarColors[0];
+        //        break;
+        //    case DoorLocked.unlocked:
+        //        doorRadar.GetComponent<SpriteRenderer>().material = doorRadarColors[1];
+        //        break;
+        //    default:
+        //        break;
+        //}
+        //doorCollider = GetComponent<BoxCollider2D>();
+
         keyPadComponent = keyPadParentGO.GetComponent<ElevatorKeypad>();
         keyPadComponent.KeyPadDelegate += OpenElevator;
     }
     private void OpenElevator()
     {
-        elevatorBlocker.enabled = false;
-        unlocked = true;
-        elevatorFloorTransfer.enabled = true;
+        if(GameManager.instance.talkedToJose && SceneManager.GetActiveScene().name.Equals("Chapter_3_b_Basement")){
+            if (!GameManager.instance.sawAlien)
+            {
+                AlienCinematicManager.instance.Begin();
+                GameManager.instance.sawAlien = true;
+                elevatorBlocker.enabled = false;
+                unlocked = true;
+                elevatorFloorTransfer.enabled = true;
+            }
+            else
+            {
+                elevatorBlocker.enabled = false;
+                unlocked = true;
+                elevatorFloorTransfer.enabled = true;
+            }
+        }
+        else
+        {
+            elevatorBlocker.enabled = false;
+            unlocked = true;
+            elevatorFloorTransfer.enabled = true;
+        }
     }
     void Update()
     {
@@ -41,7 +77,11 @@ public class ElevatorManager : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        canUseKeypad = true;
+        if (collision.CompareTag("PlayerFoundCollider"))
+        {
+            canUseKeypad = true;
+        }
+
         if (unlocked)
         {
             if (collision.CompareTag("PlayerFoundCollider"))
@@ -72,11 +112,11 @@ public class ElevatorManager : MonoBehaviour
         string sceneName = SceneManager.GetActiveScene().name;
         if (inElavator && sceneName.Contains("Floor"))
         {
-            LevelLoaderManager.instance.LoadScene("Chapter_" + GameManager.instance.chapter + "_Basement");
+            LevelLoaderManager.instance.LoadScene("Chapter_" + GameManager.instance.chapter + "_b_Basement");
         }
         else
         {
-            LevelLoaderManager.instance.LoadScene("Chapter_" + GameManager.instance.chapter + "_Floor_One");
+            LevelLoaderManager.instance.LoadScene("Chapter_" + GameManager.instance.chapter + "_a_Floor_One");
         }
     }
 }

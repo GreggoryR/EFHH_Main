@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1483879dbb27885489f943c0750abb32, type: 3}
   m_Name: NoteMessage
   m_EditorClassIdentifier: 
-  message: 
+  message: You recieved a note from Ayako. I wonder why there are dried tear stains
+    on it...
   icon: {fileID: 0}

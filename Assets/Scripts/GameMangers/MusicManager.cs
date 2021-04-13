@@ -1,7 +1,11 @@
+///////////////////////////////////////////////////////////////////////////
+//FileName: MusicManager.cs
+//Author : Greggory Reed
+//Description : Class for game music
+////////////////////////////////////////////////////////////////////////////
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 public class MusicManager : MonoBehaviour
@@ -9,7 +13,7 @@ public class MusicManager : MonoBehaviour
     public static MusicManager instance;
     [SerializeField] MusicSO musicCollection;
     AudioSource musicSource;
-    enum Songs { title, intro, gamePlay, basement, countdown, laser, credits};
+    public enum Songs { newHome, wheels, o2, basement, forgotten, theship, scary};
     [SerializeField] Songs currentSongNum;
 
     private void Awake()
@@ -29,25 +33,55 @@ public class MusicManager : MonoBehaviour
         //change song to correct level if need be
         //not sure how this will be implemented when scenes are made
         musicSource = GetComponent<AudioSource>();
-        if (SceneManager.GetActiveScene().buildIndex == (int)Songs.title)
+        if (SceneManager.GetActiveScene().name.Equals("x_StartMenu"))
         {
-            currentSongNum = Songs.title;
+            currentSongNum = Songs.newHome;
             musicSource.clip = musicCollection.intro;
         }
-        else if(SceneManager.GetActiveScene().buildIndex == 1)
+        else if(SceneManager.GetActiveScene().name.Equals("Chapter_0_Floor_One"))
         {
-            currentSongNum = Songs.title;
+            currentSongNum = Songs.newHome;
             musicSource.clip = musicCollection.chapter0;
         }
-        else if (SceneManager.GetActiveScene().buildIndex == 2)
+        else if (SceneManager.GetActiveScene().name.Equals("Chapter_1_Floor_One"))
         {
-            currentSongNum = Songs.title;
+            currentSongNum = Songs.wheels;
             musicSource.clip = musicCollection.chapter1;
         }
-        else if (SceneManager.GetActiveScene().name.Equals("Chapter_3_Basement"))
+        else if (SceneManager.GetActiveScene().name.Equals("Chapter_2_Floor_One"))
         {
-            currentSongNum = Songs.title;
-            musicSource.clip = musicCollection.intro;
+            currentSongNum = Songs.o2;
+            musicSource.clip = musicCollection.chapter2;
+        }
+        else if (SceneManager.GetActiveScene().name.Equals("Chapter_3_a_Floor_One"))
+        {
+            currentSongNum = Songs.o2;
+            musicSource.clip = musicCollection.chapter2;
+        }
+        else if (SceneManager.GetActiveScene().name.Equals("Chapter_3_b_Basement"))
+        {
+            currentSongNum = Songs.basement;
+            musicSource.clip = musicCollection.chapter3;
+        }
+        else if (SceneManager.GetActiveScene().name.Equals("Chapter_4_a_Floor_One"))
+        {
+            currentSongNum = Songs.basement;
+            musicSource.clip = musicCollection.chapter4;
+        }
+        else if (SceneManager.GetActiveScene().name.Equals("Chapter_4_b_Basement"))
+        {
+            currentSongNum = Songs.forgotten;
+            musicSource.clip = musicCollection.chapter4;
+        }
+        else if (SceneManager.GetActiveScene().name.Equals("Chapter_5_a_Floor_One"))
+        {
+            currentSongNum = Songs.theship;
+            musicSource.clip = musicCollection.chapter5;
+        }
+        else if (SceneManager.GetActiveScene().name.Equals("Chapter_5_b_Basement"))
+        {
+            currentSongNum = Songs.theship;
+            musicSource.clip = musicCollection.chapter5;
         }
         musicSource.Play();
     }
@@ -57,9 +91,19 @@ public class MusicManager : MonoBehaviour
         
     }
 
-    public void ChangeSong()
+    public void ChangeSong(Songs song)
     {
-
+        switch (song)
+        {
+            case Songs.scary:
+                currentSongNum = Songs.scary;
+                musicSource.clip = musicCollection.scary;
+                musicSource.Play();
+                break;
+            default:
+                break;
+        }
+        
     }
 
 

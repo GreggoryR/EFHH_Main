@@ -10,6 +10,7 @@ public class SelectedSlot : MonoBehaviour
 {
     ItemSO item;
     public Image icon;
+    public MessageSO unlocked;
 
     
 
@@ -42,16 +43,13 @@ public class SelectedSlot : MonoBehaviour
                 ItemManager.instance.UseHealthItem(item);
                 break;
             case ItemType.DOOR:
-                TryToOpenDoor();
+                ItemManager.instance.TryToOpenDoorWithKey(unlocked, item);
                 break;
             default:
                 break;
         }
     }
 
-    private void TryToOpenDoor()
-    {
-        throw new NotImplementedException();
-    }
+    
 }
 

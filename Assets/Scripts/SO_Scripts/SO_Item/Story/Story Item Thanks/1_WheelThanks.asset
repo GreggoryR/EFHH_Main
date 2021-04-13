@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: 1_WheelThanks
   m_EditorClassIdentifier: 
   storyItemName: 
-  thanks: []
+  thanks:
+  - Thanks for finding the wheel.

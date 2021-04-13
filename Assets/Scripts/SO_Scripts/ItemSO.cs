@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public enum ItemType { NPC, HEALTH, DOOR, LASER };
-public enum ItemSubType { NPC_SayThanks, NPC_ThanksAndGift, NPC_ThanksAndLvl, NPC_ThanksGiftAndLvl, HEALTH_Small, HEALTH_Medium, HEALTH_Large,HEALTH_Coffee, DOOR_KeyCard, LASER_Keys};
+public enum ItemSubType { NPC_SayThanks, NPC_ThanksAndGift, NPC_ThanksAndLvl, NPC_ThanksGiftAndLvl, NPC_AfuaSaysThanks, HEALTH_Small, HEALTH_Medium, HEALTH_Large,HEALTH_Coffee, DOOR_KeyCard, LASER_Keys};
 
 [CreateAssetMenu(fileName = "New Item", menuName ="Inventory/Item") ]
 public class ItemSO : ScriptableObject

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Note
   itemType: 0
-  itemSubType: 1
+  itemSubType: 4
   itemFor: Afua
   itemFrom: Ayako
   healthIncrease: 0

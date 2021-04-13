@@ -7,6 +7,9 @@ public class StoryManager : MonoBehaviour
     public static StoryManager instance;
     public bool canLoadNextLevel;
     enum Characters { Bishop, Barry, Zhao, Sam, Oliver, Kwan, Jose, Ayako, Afua }
+    public bool chapterThreeStarted = false;
+    public bool chapterFourStarted = false;
+    public bool chapterFiveStarted = false;
 
     private void Awake()
     {

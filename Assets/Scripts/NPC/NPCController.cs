@@ -57,7 +57,8 @@ public class NPCController : MonoBehaviour
                 GameManager.instance.beingChased = false;
                 GameManager.instance.StopChasing();
                 string[] chapterSectionDialogue = GetChapterSectionDialogue();
-                ItemManager.instance.residentItemCollection.TryGetValue("ayakoTelescope", out ItemSO ayakoTeleReturnedItem);
+
+                ItemManager.instance.residentItemCollection.TryGetValue("AyakoTelescope", out ItemSO ayakoTeleReturnedItem);
                 ItemManager.instance.ResidentGivesItem(ayakoTeleReturnedItem, chapterSectionDialogue, false);
             } 
             else 
@@ -68,7 +69,7 @@ public class NPCController : MonoBehaviour
                 GameManager.instance.beingChased = false;
                 GameManager.instance.StopChasing();
                 string[] chapterSectionDialogue = GetChapterSectionDialogue();
-                ItemManager.instance.residentItemCollection.TryGetValue("ayakoNote", out ItemSO ayakoNote);
+                ItemManager.instance.residentItemCollection.TryGetValue("AyakoNote", out ItemSO ayakoNote);
                 ItemManager.instance.ResidentGivesItem(ayakoNote, chapterSectionDialogue, false);
             }
         }
@@ -77,9 +78,10 @@ public class NPCController : MonoBehaviour
             playerButtonCanvas.SetActive(false);
             GameManager.instance.isTalking = true;
             GameManager.instance.beingChased = false;
+            GameManager.instance.talkedToJose = true;
             GameManager.instance.StopChasing();
             string[] chapterSectionDialogue = GetChapterSectionDialogue();
-            ItemManager.instance.residentItemCollection.TryGetValue("joseRope", out ItemSO joseRopeReturnedItem);
+            ItemManager.instance.residentItemCollection.TryGetValue("JoseRope", out ItemSO joseRopeReturnedItem);
             ItemManager.instance.ResidentGivesItem(joseRopeReturnedItem, chapterSectionDialogue, false);
         }
         else if (npcInfo.characterName.Equals("Kwan"))
@@ -89,7 +91,7 @@ public class NPCController : MonoBehaviour
             GameManager.instance.beingChased = false;
             GameManager.instance.StopChasing();
             string[] chapterSectionDialogue = GetChapterSectionDialogue();
-            ItemManager.instance.residentItemCollection.TryGetValue("kwanRose", out ItemSO kwanRoseReturnedItem);
+            ItemManager.instance.residentItemCollection.TryGetValue("KwanRose", out ItemSO kwanRoseReturnedItem);
             ItemManager.instance.ResidentGivesItem(kwanRoseReturnedItem, chapterSectionDialogue, false);
         }
         else

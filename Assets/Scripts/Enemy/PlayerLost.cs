@@ -23,7 +23,7 @@ public class PlayerLost : MonoBehaviour
  
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && !gameObject.CompareTag("Alien"))
         {
             GameManager.instance.beingChased = false;
             playerFound.SetActive(true);

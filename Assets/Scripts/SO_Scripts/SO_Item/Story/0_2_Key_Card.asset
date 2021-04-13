@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 0_2_Key_Card
   m_EditorClassIdentifier: 
   itemName: Key_Card
-  itemType: 0
-  itemSubType: 7
+  itemType: 2
+  itemSubType: 8
   itemFor: NPC name
   itemFrom: Bishop
   healthIncrease: 0

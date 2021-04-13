@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class NotificationManager : MonoBehaviour
 {
@@ -26,6 +27,10 @@ public class NotificationManager : MonoBehaviour
 
     [SerializeField] public bool notificationIsOpen = false;
     public GameObject inventoryUIButton;
+
+    [SerializeField] GameObject levelChangeManger;
+
+    [SerializeField] GameObject countDown;
 
     public string message;
 
@@ -67,13 +72,6 @@ public class NotificationManager : MonoBehaviour
         }
     }
 
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(10f);
-        
-
-    }
-
     private void DoorLockedNotification(MessageSO message)
     {
         if (!notificationIsOpen)
@@ -87,7 +85,7 @@ public class NotificationManager : MonoBehaviour
         if (!notificationIsOpen)
         {
             activeNotication = ActiveNotification.receiveItem;
-            BeginNotification(ActiveNotification.doorLocked, message);
+            BeginNotification(ActiveNotification.receiveItem, message);
             //activeNotication = ActiveNotification.receiveItem;
             //recieveItemNotifcaton.SetActive(true);
             //GameManager.instance.isTalking = true;
@@ -151,6 +149,10 @@ public class NotificationManager : MonoBehaviour
         Time.timeScale = 1f;
         notificationIsOpen = false;
         CheckToLoadNextLevel();
+        if (SceneManager.GetActiveScene().name.Equals("Chapter_5_a_Floor_One"))
+        {
+            countDown.SetActive(true);
+        }
     }
 
     //public void Pause()
@@ -165,7 +167,7 @@ public class NotificationManager : MonoBehaviour
     {
         if (StoryManager.instance.canLoadNextLevel)
         {
-            LevelLoaderManager.instance.GetComponent<LevelLoaderManager>().LoadNextLevel(); // music fade, screen fade, and load level occurs here
+            levelChangeManger.GetComponent<LevelChangeManager>().LoadNextLevel(); // music fade, screen fade, and load level occurs here
         }
     }
 

@@ -1,6 +1,10 @@
-﻿using System;
+﻿///////////////////////////////////////////////////////////////////////////
+//FileName: LevelLoaderManager.cs
+//Author : Greggory Reed
+//Description : Class for loading levels
+////////////////////////////////////////////////////////////////////////////
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,8 +14,7 @@ public class LevelLoaderManager : MonoBehaviour
     public static LevelLoaderManager instance;
     public GameObject loadingBars;
     public Slider loadingBar;
-    [SerializeField] public GameObject fade;
-    [SerializeField] public AudioSource audioSource;
+    
 
 
     enum SceneType { name, buildIndex, scene};
@@ -23,7 +26,7 @@ public class LevelLoaderManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -31,28 +34,6 @@ public class LevelLoaderManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
-        }
-    }
-
-    private void Start()
-    {
-        DialogueManager.instance.onDialogueFinished += LoadNextLevel;
-    }
-    public void LoadNextLevel()
-    {
-        if (SceneManager.GetActiveScene().name.Equals("x_StartMenu") || StoryManager.instance.canLoadNextLevel)
-        {
-            StoryManager.instance.canLoadNextLevel = false;
-            GameManager.instance.chapter++;
-            //look for current music and fade it out
-            //will need to prevent radar cam from being first found--uses GDFS
-            //AudioSource audio = FindObjectOfType<Camera>().GetComponent<AudioSource>(); //will change each level
-            StartCoroutine(FadeOutAudio(audioSource, .5f));
-            //fade out to black
-            fade.SetActive(true);
-            fade.GetComponent<FadeManager>().FadeOut();
-            //start loading
-            StartCoroutine(PauseBeforeLoad());
         }
     }
 
@@ -83,7 +64,6 @@ public class LevelLoaderManager : MonoBehaviour
         StartCoroutine(SceneLoad());
 
     }
-    //
     IEnumerator SceneLoad()
     {
         switch (sceneType)
@@ -143,8 +123,6 @@ public class LevelLoaderManager : MonoBehaviour
             default:
             break;
         }
-        
-        
     }
     IEnumerator WaitForBar(AsyncOperation sceneLoadingIndex)
     {
@@ -152,25 +130,4 @@ public class LevelLoaderManager : MonoBehaviour
         loadingBars.SetActive(false);
         sceneLoadingIndex.allowSceneActivation = true;
     }
-    
-    IEnumerator FadeOutAudio(AudioSource audioSource, float FadeTime)
-    {
-        float startVolume = audioSource.volume;
-        while (audioSource.volume > 0.02)
-        {
-            audioSource.volume -= startVolume * Time.deltaTime / FadeTime;
-            yield return null;
-        }
-        audioSource.Stop();
-        audioSource.volume = startVolume;
-        
-    }
-    IEnumerator PauseBeforeLoad()
-    {
-        yield return new WaitForSeconds(1f);
-        var thisScene = SceneManager.GetActiveScene();
-        var nextScene = thisScene.buildIndex + 1;
-        LoadScene(nextScene);
-    }
-
 }

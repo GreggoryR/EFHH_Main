@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1483879dbb27885489f943c0750abb32, type: 3}
   m_Name: Chapter3
   m_EditorClassIdentifier: 
-  message: 
+  message: 'Chapter Three : Rope'
   icon: {fileID: 0}

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1483879dbb27885489f943c0750abb32, type: 3}
   m_Name: OxygenTankMessage
   m_EditorClassIdentifier: 
-  message: 
+  message: You recieved an oxygen tank from Oliver.
   icon: {fileID: 0}

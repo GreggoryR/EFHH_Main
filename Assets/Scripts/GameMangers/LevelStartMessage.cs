@@ -1,6 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: LevelStartMessages.cs
+//Author : Greggory Reed
+//Description : Class for start messages
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;

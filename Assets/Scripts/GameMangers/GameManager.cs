@@ -52,7 +52,9 @@ public class GameManager : MonoBehaviour
     public bool canMove = true;
     [HideInInspector] public bool isTalking = false;
     [HideInInspector] public bool beingChased = false;
-    [SerializeField] public bool talkedToAfua;
+    [SerializeField] public bool talkedToAfua = false;
+    [SerializeField] public bool talkedToJose = false;
+    [SerializeField] public bool sawAlien = false;
     public float playerMoveX = 0;
     public float playerMoveY = 0;
     #endregion

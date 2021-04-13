@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intro: {fileID: 8300000, guid: 19c4d1719717f994fb760c99a63d3ab3, type: 3}
   chapter0: {fileID: 8300000, guid: 19c4d1719717f994fb760c99a63d3ab3, type: 3}
-  chapter1: {fileID: 8300000, guid: f6e17160fc067964fa08a4c5b9b24734, type: 3}
-  chapter2: {fileID: 8300000, guid: c8bcc4342aca49446a3660e5018db9eb, type: 3}
-  chapter3: {fileID: 8300000, guid: f6260e52e8bb53446a17ab30e6bc900e, type: 3}
-  chapter4: {fileID: 8300000, guid: f6260e52e8bb53446a17ab30e6bc900e, type: 3}
-  chapter5: {fileID: 8300000, guid: f6260e52e8bb53446a17ab30e6bc900e, type: 3}
+  chapter1: {fileID: 8300000, guid: b1d074070252a8349a70615633922785, type: 3}
+  chapter2: {fileID: 8300000, guid: 4d0c2623fcd029c45a56090fd52ee237, type: 3}
+  chapter3: {fileID: 8300000, guid: 32239db14bdc65c47bbfd0982e85e023, type: 3}
+  chapter4: {fileID: 8300000, guid: 0db0f1f1da284104da7c3f208cdba179, type: 3}
+  chapter5: {fileID: 8300000, guid: 97181f3c22290d24f83ab32738165f23, type: 3}
+  scary: {fileID: 8300000, guid: 4be2df7c151bae549bb99a8faf79f9c0, type: 3}

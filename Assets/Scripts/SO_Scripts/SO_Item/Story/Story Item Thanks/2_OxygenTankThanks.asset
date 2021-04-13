@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: 2_OxygenTankThanks
   m_EditorClassIdentifier: 
   storyItemName: 
-  thanks: []
+  thanks:
+  - Thanks for finding the oxygen tank.

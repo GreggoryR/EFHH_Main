@@ -11,6 +11,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager instance;
@@ -29,6 +31,9 @@ public class ItemManager : MonoBehaviour
     List<string> residentItemKeys = new List<string> { "BishopKey", "BarryWheel", "ZhaoBeer", "SamMatches", "OliverOxygen", "AyakoTelescope", "KwanRose", "JoseRope", "AyakoNote" };
     public Dictionary<string, ItemSO> residentItemCollection = new Dictionary<string, ItemSO>(9);
     public bool itemReturnedToPlayer;
+
+    public delegate void TopHallwayDoorUnlockedEvent();
+    public static TopHallwayDoorUnlockedEvent topHallwayDoorUnlocked;
 
     private void Awake()
     {
@@ -52,7 +57,10 @@ public class ItemManager : MonoBehaviour
         {
             GameManager.instance.canMove = false;
             GameManager.instance.isTalking = true;
-            GameManager.instance.StopChasing();
+            if (GameManager.instance.beingChased)
+            {
+                GameManager.instance.StopChasing();
+            }
             Debug.Log("Giving the item to " + item.itemFor);
             Inventory.instance.Remove(item);
             switch (item.itemSubType)
@@ -69,6 +77,9 @@ public class ItemManager : MonoBehaviour
                 case ItemSubType.NPC_ThanksGiftAndLvl:
                     GiveItemToPlayerAndLoadNextLevel(GameManager.instance.currentNPC, item);
                     break;
+                case ItemSubType.NPC_AfuaSaysThanks:
+                    TalkToAfuaStoryMoment(GameManager.instance.currentNPC, item);
+                    break;
                 case ItemSubType.HEALTH_Small:
                     Debug.LogError("Item has wrong type/subtype");
                     break;
@@ -84,7 +95,6 @@ public class ItemManager : MonoBehaviour
                 default:
                     break;
             }
-        
         }
     }
     //----Initialization----//
@@ -101,7 +111,7 @@ public class ItemManager : MonoBehaviour
     {
         Characters character = (Characters)Enum.Parse(typeof(Characters), item.itemFor);
         GameManager.instance.chapterWithSections[GameManager.instance.chapter][(int)character]++;
-        string[] characterThanks = npc.itemThanks[GameManager.instance.chapter].thanks;
+        string[] characterThanks = npc.itemThanks[0].thanks;
         StoryManager.instance.canLoadNextLevel = false;
         itemReturnedToPlayer = false;
         GameManager.instance.talkedToAfua = true;
@@ -111,7 +121,7 @@ public class ItemManager : MonoBehaviour
     {
         Characters character = (Characters)Enum.Parse(typeof(Characters), item.itemFor);
         GameManager.instance.chapterWithSections[GameManager.instance.chapter][(int)character]++;
-        string[] characterThanks = npc.itemThanks[GameManager.instance.chapter].thanks;
+        string[] characterThanks = npc.itemThanks[0].thanks;
         StoryManager.instance.canLoadNextLevel = false;
         itemReturnedToPlayer = true;
         residentItemCollection.TryGetValue(item.itemInReturn, out ItemSO barryReturn);
@@ -123,6 +133,7 @@ public class ItemManager : MonoBehaviour
         itemReturnedToPlayer = false;
         DialogueManager.instance.ui_Inventory.SetActive(false);
         string[] bishopThanks = npc.itemThanks[GameManager.instance.chapter].thanks;
+        string what = bishopThanks[0];
         DialogueManager.instance.ui_Player.SetActive(true);
         DialogueManager.instance.StartCoversation(bishopThanks, "Bishop", true);
     }
@@ -131,6 +142,7 @@ public class ItemManager : MonoBehaviour
         StoryManager.instance.canLoadNextLevel = true;
         itemReturnedToPlayer = true;
         string[] bishopThanks = npc.itemThanks[GameManager.instance.chapter].thanks;
+        string what = bishopThanks[0];
         residentItemCollection.TryGetValue(item.itemInReturn, out ItemSO bishopReturn);
         ResidentGivesItem(bishopReturn, bishopThanks, true);
     }
@@ -138,19 +150,26 @@ public class ItemManager : MonoBehaviour
 
     public void ResidentGivesItem(ItemSO item, string[] dialogue, bool nextChapter)
     {
-        switch (item.itemFor)
+        switch (item.itemFrom)
         {
+            
             case "Kwan":
-            DontLoadLevelAndGiveItem(item, dialogue, nextChapter);
+                GameManager.instance.chapterWithSections[GameManager.instance.chapter][(int)Characters.Kwan]++;
+                DontLoadLevelAndGiveItem(item, dialogue, nextChapter);
             break;
             case "Jose":
-            DontLoadLevelAndGiveItem(item, dialogue, nextChapter);
+                GameManager.instance.chapterWithSections[GameManager.instance.chapter][(int)Characters.Jose]++;
+                DontLoadLevelAndGiveItem(item, dialogue, nextChapter);
             break;
             case "Ayako":
-            DontLoadLevelAndGiveItem(item, dialogue, nextChapter);
+                Characters ayako = (Characters)Enum.Parse(typeof(Characters), item.itemFor);
+                GameManager.instance.chapterWithSections[GameManager.instance.chapter][(int)Characters.Ayako]++;
+                DontLoadLevelAndGiveItem(item, dialogue, nextChapter);
             break;
             case "AyakoTelescope":
-            DontLoadLevelAndGiveItem(item, dialogue, nextChapter);
+                Characters ayakoTele = (Characters)Enum.Parse(typeof(Characters), item.itemFor);
+                GameManager.instance.chapterWithSections[GameManager.instance.chapter][(int)Characters.Ayako]++;
+                DontLoadLevelAndGiveItem(item, dialogue, nextChapter);
             break;
             default:
             ResidentGivesGiftAndSaysDialogue(item.itemFrom, dialogue, item, nextChapter);
@@ -240,6 +259,25 @@ public class ItemManager : MonoBehaviour
     }
     #endregion
     #region Key Items Management
+
+    public void TryToOpenDoorWithKey(MessageSO message, ItemSO item)
+    {
+        if (GameManager.instance.currentDoor != null)
+        {
+            GameManager.instance.canMove = false;
+            GameManager.instance.isTalking = true;
+            GameManager.instance.StopChasing();
+            Debug.Log("Unlocking door");
+            Inventory.instance.Remove(item);
+            GameManager.instance.currentDoor.GetComponent<DoorManager>().doorLocked = DoorManager.DoorLocked.unlocked;
+            if(item.itemSubType == ItemSubType.DOOR_KeyCard && topHallwayDoorUnlocked != null)
+            {
+                topHallwayDoorUnlocked.Invoke();
+            }
+            DialogueManager.instance.ui_Inventory.SetActive(false);
+            NotificationBroker.DoorIsLockedCall(message);
+        }
+    }
     #endregion
 }
 

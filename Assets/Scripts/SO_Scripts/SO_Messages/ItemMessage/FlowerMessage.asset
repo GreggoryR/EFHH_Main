@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1483879dbb27885489f943c0750abb32, type: 3}
   m_Name: FlowerMessage
   m_EditorClassIdentifier: 
-  message: 
+  message: You recieved a single rose from the Kwan. I hope he isn't too depressed...
   icon: {fileID: 0}

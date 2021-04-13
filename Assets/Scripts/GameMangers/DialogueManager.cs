@@ -41,6 +41,10 @@ public class DialogueManager : MonoBehaviour
     }
     public void StartCoversation(string[] chapterSectionDialogue, string name, bool isNextChapter)
     {
+        //if(onDialogueFinished == null)
+        //{
+        //    LevelCanvasManager.insta
+        //}
         nameText.text = name;
         this.isNextChapter = isNextChapter;
         sentences.Clear();

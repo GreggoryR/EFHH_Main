@@ -12,5 +12,6 @@ public class MusicSO : ScriptableObject
     [SerializeField] public AudioClip chapter3;
     [SerializeField] public AudioClip chapter4;
     [SerializeField] public AudioClip chapter5;
+    [SerializeField] public AudioClip scary;
 
 }

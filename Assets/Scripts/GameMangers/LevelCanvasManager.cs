@@ -1,5 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: LevelCanvasManager.cs
+//Author : Greggory Reed
+//Description : Class for start menu canvas
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 
 public class LevelCanvasManager : MonoBehaviour

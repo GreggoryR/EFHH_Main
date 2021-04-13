@@ -6,6 +6,7 @@
 
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
+using static ItemManager;
 
 public class DoorManager : MonoBehaviour
 {
@@ -18,8 +19,8 @@ public class DoorManager : MonoBehaviour
     public bool playerIsNextToDoor = false;
     enum DoorType { topHallway, entrance, garden, bedroom, ayako, elevator };
     [SerializeField] DoorType doorType;
-    enum DoorLocked {locked, unlocked};
-    [SerializeField] DoorLocked doorLocked;
+    public enum DoorLocked {locked, unlocked};
+    [SerializeField] public DoorLocked doorLocked;
 
     [SerializeField] GameObject doorLight;
 
@@ -52,22 +53,31 @@ public class DoorManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             playerIsNextToDoor = true;
+            GameManager.instance.currentDoor = gameObject;
             if (!doorIsLocked)
             {
                 playerButtonCanvas.SetActive(true);
             }
         } 
     }
+
+    public void UpdateDoor()
+    {
+        playerButtonCanvas.SetActive(true);
+        doorRadar.GetComponent<SpriteRenderer>().material = doorRadarColors[1];
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             playerIsNextToDoor = false;
+            GameManager.instance.currentDoor = null;
             if (!doorIsLocked)
             {
                 playerButtonCanvas.SetActive(false);
@@ -103,7 +113,7 @@ public class DoorManager : MonoBehaviour
                     switch (doorLocked)
                     {
                         case DoorLocked.locked:
-                            NotificationBroker.DoorIsLockedCall(new MessageSO { message = "Door is locked" });
+                            NotificationBroker.DoorIsLockedCall(doorIsLockedMessage);
                             break;
                         case DoorLocked.unlocked:
                             doorCollider.enabled = false;
@@ -119,7 +129,7 @@ public class DoorManager : MonoBehaviour
                     switch (doorLocked)
                     {
                         case DoorLocked.locked:
-                            NotificationBroker.DoorIsLockedCall(new MessageSO { message = "Door is locked" });
+                            NotificationBroker.DoorIsLockedCall(doorIsLockedMessage);
                             break;
                         case DoorLocked.unlocked:
                             doorCollider.enabled = false;
