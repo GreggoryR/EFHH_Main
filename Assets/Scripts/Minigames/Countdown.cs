@@ -1,6 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: Countdown.cs
+//Author : Greggory Reed
+//Description : Class for the final countdown
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +27,7 @@ public class Countdown : MonoBehaviour
                 timeRemaining -= Time.deltaTime;
                 string minutes = (timeRemaining / 60).ToString("00");
                 string seconds = (timeRemaining % 60).ToString("00");
-                string miliseconds = ((timeRemaining * 60)%60).ToString("00");
+                string miliseconds = ((timeRemaining * 60) % 60).ToString("00");
                 timerText.text = minutes + ":" + seconds + ":" + miliseconds;
             }
             else

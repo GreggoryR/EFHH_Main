@@ -1,5 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿///////////////////////////////////////////////////////////////////////////
+//FileName: Interactable.cs
+//Author : Greggory Reed
+//Description : Class for iteracting with items
+////////////////////////////////////////////////////////////////////////////
+///
 using UnityEngine;
 
 public class Interactable : MonoBehaviour

@@ -1,6 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿///////////////////////////////////////////////////////////////////////////
+//FileName: SelectedSlotSlot.cs
+//Author : Greggory Reed
+//Description : Class for selected slot
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 

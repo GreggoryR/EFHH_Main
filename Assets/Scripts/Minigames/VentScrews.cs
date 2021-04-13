@@ -1,24 +1,20 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: VentScrews.cs
+//Author : Greggory Reed
+//Description : Class for the vent screws
+////////////////////////////////////////////////////////////////////////////
+///
 using UnityEngine;
 using UnityEngine.UI;
 
 public class VentScrews : MonoBehaviour
 {
+    [SerializeField] VentManager vm;
     int tlScrew;
     int trScrew;
     int blScrew;
     int brScrew;
     int unscrewed = 0;
-    [SerializeField] VentManager vm;
-
-
-
-    void Update()
-    {
-        
-    }
 
     public void IncrementScrew(Button button)
     {
@@ -82,7 +78,4 @@ public class VentScrews : MonoBehaviour
         }
         
     }
-
-    
-
 }

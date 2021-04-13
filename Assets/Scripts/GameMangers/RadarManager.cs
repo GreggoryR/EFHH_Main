@@ -1,6 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: RadarManager.cs
+//Author : Greggory Reed
+//Description : Class for radar
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 
 public class RadarManager : MonoBehaviour
@@ -19,7 +22,6 @@ public class RadarManager : MonoBehaviour
         EnterExitBroker.PlayerEntersBuilding -= ChangeRaderMaskEnter;
         EnterExitBroker.PlayerExitsBuilding -= ChangeRaderMaskExit;
     }
-
 
     private void ChangeRaderMaskEnter()
     {

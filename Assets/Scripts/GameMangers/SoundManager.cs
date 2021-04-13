@@ -1,8 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+///////////////////////////////////////////////////////////////////////////
+//FileName: SoundManager.cs
+//Author : Greggory Reed
+//Description : Class for sounds in game
+////////////////////////////////////////////////////////////////////////////
 
+using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {

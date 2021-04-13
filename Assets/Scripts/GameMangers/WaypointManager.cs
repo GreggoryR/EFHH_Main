@@ -1,5 +1,9 @@
-using System;
-using System.Collections;
+///////////////////////////////////////////////////////////////////////////
+//FileName: WaypointManager.cs
+//Author : Greggory Reed
+//Description : Class for enemy waypoints
+////////////////////////////////////////////////////////////////////////////
+///
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,15 +28,6 @@ public class WaypointManager : MonoBehaviour
             allRoutesToGive.Add(route.GetComponent<AIWaypointList>().ReturnListOfWayPoints());
         }
         routesGiven = -1;
-    }
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
     }
 
     public List<Waypoint> ReturnEnemyRoute()

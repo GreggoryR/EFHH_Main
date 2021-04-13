@@ -1,3 +1,9 @@
+///////////////////////////////////////////////////////////////////////////
+//FileName: TurnWheelGame.cs
+//Author : Greggory Reed
+//Description : Wont be using
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 
 public class TurnWheelGame : MonoBehaviour
@@ -5,12 +11,6 @@ public class TurnWheelGame : MonoBehaviour
     [SerializeField] GameObject wheel;
     float wheelRotation;
     [SerializeField] Animator movement;
-
-
-    void Start()
-    {
-    }
-
 
 
     public void MoveScreenIn()

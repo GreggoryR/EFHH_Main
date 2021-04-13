@@ -1,18 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: PlayerAIDestination.cs
+//Author : Greggory Reed
+//Description : Filler class for transform
+////////////////////////////////////////////////////////////////////////////
 using UnityEngine;
 
 public class PlayerAIDestination : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

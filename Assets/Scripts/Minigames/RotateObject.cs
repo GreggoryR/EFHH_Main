@@ -1,5 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: RotateObject.cs
+//Author : Aladine - https://answers.unity.com/questions/716086/spin-a-2d-object-with-mouse-drag.html
+//Description : Class for rotating objects - won't be using but still interesting
+////////////////////////////////////////////////////////////////////////////
 using UnityEngine;
 
 public class RotateObject : MonoBehaviour
@@ -13,10 +16,6 @@ public class RotateObject : MonoBehaviour
 
 
 
-    void Start()
-    {
-
-    }
 
     void Update()
     {

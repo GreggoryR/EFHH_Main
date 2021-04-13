@@ -1,6 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: ElevatorKeypad.cs
+//Author : Greggory Reed
+//Description : Class for elevator keypad
+////////////////////////////////////////////////////////////////////////////
+
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;

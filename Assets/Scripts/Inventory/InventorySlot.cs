@@ -1,6 +1,11 @@
-﻿using UnityEngine;
+﻿///////////////////////////////////////////////////////////////////////////
+//FileName: InventorySlot.cs
+//Author : Greggory Reed
+//Description : Class for inventory slot
+////////////////////////////////////////////////////////////////////////////
+
+using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
 public class InventorySlot : MonoBehaviour
 {

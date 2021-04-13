@@ -1,6 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+///////////////////////////////////////////////////////////////////////////
+//FileName: NotificationManager.cs
+//Author : Greggory Reed
+//Description : Class for game notifications
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -47,9 +50,6 @@ public class NotificationManager : MonoBehaviour
     {
         message = "";
         //DialogueManager.instance.onDialogueFinished += ActivateNotifcationCallback; //onDialogueFinished
-        
-        
-        
     }
 
     private void GameStartNotification(MessageSO message)
@@ -68,7 +68,6 @@ public class NotificationManager : MonoBehaviour
         {
             activeNotication = ActiveNotification.chapterStart;
             BeginNotification(ActiveNotification.chapterStart, message);
-            
         }
     }
 

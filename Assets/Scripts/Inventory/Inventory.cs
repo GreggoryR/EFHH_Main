@@ -1,5 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿///////////////////////////////////////////////////////////////////////////
+//FileName: Inventory.cs
+//Author : Greggory Reed
+//Description : Class for player inventory
+////////////////////////////////////////////////////////////////////////////
+
 using UnityEngine;
 
 public class Inventory : MonoBehaviour

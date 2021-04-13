@@ -1,7 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿///////////////////////////////////////////////////////////////////////////
+//FileName: NPCCOntroller.cs
+//Author : Greggory Reed
+//Description : Class to manage NPCs (residents)
+////////////////////////////////////////////////////////////////////////////
+
+using System.Collections;
 using UnityEngine;
-using System;
 
 public class NPCController : MonoBehaviour
 {
@@ -37,7 +41,6 @@ public class NPCController : MonoBehaviour
             }
         }
     }
-
     IEnumerator IntroAndConversation()
     {
         npcIntroduction.SetActive(true);
@@ -104,8 +107,6 @@ public class NPCController : MonoBehaviour
             DialogueManager.instance.StartCoversation(chapterSectionDialogue, npcInfo.characterName, false);
         }
     }
-
-
     private string[] GetChapterSectionDialogue()
     {
         //check place in story // game manager
@@ -129,7 +130,6 @@ public class NPCController : MonoBehaviour
             {
                 playerButtonCanvas.SetActive(true);
             }
-            
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -141,9 +141,7 @@ public class NPCController : MonoBehaviour
             GameManager.instance.currentNPC = null;
             playerButtonCanvas.SetActive(false);
         }
-        
     }
-
     public void TurnOffPlayerButton()
     {
         playerButtonCanvas.SetActive(false);
