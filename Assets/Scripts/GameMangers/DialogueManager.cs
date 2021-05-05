@@ -20,6 +20,7 @@ public class DialogueManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] public GameObject ui_Inventory;
     [SerializeField] public GameObject ui_Player;
+    [SerializeField] public GameObject playerFound;
 
     public delegate void OnDialogueFinished();
     public OnDialogueFinished onDialogueFinished;
@@ -76,6 +77,7 @@ public class DialogueManager : MonoBehaviour
         GameManager.instance.isTalking = false;
         GameManager.instance.canMove = true;
         ui_Dialogue.SetActive(false);
+        playerFound.SetActive(true);
         onDialogueFinished.Invoke();
     }
     public void StartGiftCoversation(string[] message, string name, MessageSO itemMessage, bool isNextChapter)
@@ -99,6 +101,7 @@ public class DialogueManager : MonoBehaviour
         GameManager.instance.canMove = true;
         isGiftDialogue = false;
         ui_Dialogue.SetActive(false);
+        playerFound.SetActive(true);
         NotificationBroker.ItemRecievedFromNPCCall(giftItemMessage);
         //onDialogueFinished.Invoke();
     }

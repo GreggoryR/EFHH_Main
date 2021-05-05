@@ -21,6 +21,8 @@ MonoBehaviour:
   inventoryIcon: {fileID: 21300000, guid: 677737018468d694ba0bc7a49e5af70e, type: 3}
   inventorySelectedIcon: {fileID: 21300000, guid: bd78217079f71994d889fd05d398d7e0,
     type: 3}
-  recieveMessage: {fileID: 11400000, guid: adbd3dcdabe5b404fa3e05aa4dccaad5, type: 2}
+  recieveMessageNPC: {fileID: 11400000, guid: adbd3dcdabe5b404fa3e05aa4dccaad5, type: 2}
+  recieveMessageDesk: {fileID: 0}
+  recieveMessageGround: {fileID: 0}
   itemThanks: 
   itemInReturn: BishopKey

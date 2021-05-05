@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29d05f1108fc42640a12ecf7dd533bfc, type: 3}
+  m_Name: 3_2_Remote
+  m_EditorClassIdentifier: 
+  itemName: New Item
+  itemType: 4
+  itemSubType: 11
+  itemFor: NPC name
+  itemFrom: NPC name
+  healthIncrease: 0
+  inventoryIcon: {fileID: 21300000, guid: a5f91df30bcb25047b1a8d86c7a3b1cd, type: 3}
+  inventorySelectedIcon: {fileID: 21300000, guid: e16718d18243b9c4aa5e7307a4c2e53a,
+    type: 3}
+  recieveMessageNPC: {fileID: 0}
+  recieveMessageDesk: {fileID: 11400000, guid: 312da6e00f500ab4b8f9d2419e0aec6a, type: 2}
+  recieveMessageGround: {fileID: 0}
+  itemThanks: 
+  itemInReturn: 

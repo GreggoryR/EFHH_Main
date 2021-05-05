@@ -21,7 +21,10 @@ MonoBehaviour:
   inventoryIcon: {fileID: 21300000, guid: 128c0733bc3283846955c2bdece52196, type: 3}
   inventorySelectedIcon: {fileID: 21300000, guid: 0996f312e0bcb1b4eb0a8046c81f561b,
     type: 3}
-  recieveMessage: 'You just recieved the '
+  recieveMessageNPC: {fileID: 0}
+  recieveMessageDesk: {fileID: 0}
+  recieveMessageGround: {fileID: 11400000, guid: cf9113e168c91884eac9679a2da34a5c,
+    type: 2}
   itemThanks: Thank you for finding my screwdriver. Now I just need a wheel of some
     sort.
   itemInReturn: 

@@ -14,13 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Key
   itemType: 3
-  itemSubType: 8
+  itemSubType: 10
   itemFor: Cannon
   itemFrom: NPC name
   healthIncrease: 0
   inventoryIcon: {fileID: 21300000, guid: 810adb3232a9c4c4f8809836d7254f5f, type: 3}
   inventorySelectedIcon: {fileID: 21300000, guid: b6cf9dba7d4081d409d7741c48983747,
     type: 3}
-  recieveMessage: 'You just recieved the '
+  recieveMessageNPC: {fileID: 0}
+  recieveMessageDesk: {fileID: 0}
+  recieveMessageGround: {fileID: 11400000, guid: 498f5de8b2d08ba438ec980c0c30145f,
+    type: 2}
   itemThanks: 
   itemInReturn: 

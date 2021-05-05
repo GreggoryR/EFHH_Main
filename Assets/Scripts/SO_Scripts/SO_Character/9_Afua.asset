@@ -17,3 +17,4 @@ MonoBehaviour:
   givenItem: 0
   itemThanks:
   - {fileID: 11400000, guid: 2614c137ec067444398e61bf922af7e7, type: 2}
+  nameNPC: 8

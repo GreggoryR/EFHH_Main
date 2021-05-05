@@ -4,6 +4,7 @@
 //Description : Class for loading levels
 ////////////////////////////////////////////////////////////////////////////
 
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,6 +36,11 @@ public class LevelLoaderManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    internal void LoadScene(object getActiveScene)
+    {
+        throw new NotImplementedException();
     }
 
     //load scene overloads depending on how the index is given

@@ -15,8 +15,9 @@ MonoBehaviour:
   sectionName: Name
   storyDialoguesForSection:
   - "What\u2019s the point of living? "
-  - "I haven\u2019t seen my wife in years since she died. My children mail me flowers
-    like I\u2019m some pathetic burden. I haven\u2019t seen my grandchildren in months\u2026 "
+  - "I haven\u2019t seen my wife in years since she died..."
+  - "My children mail me flowers like I\u2019m some pathetic burden..."
+  - "I haven\u2019t seen my grandchildren in months\u2026 "
   - "I just wish my time would come soon\u2026"
   - 'You want the flowers? '
   - "Take them. I don\u2019t care. "

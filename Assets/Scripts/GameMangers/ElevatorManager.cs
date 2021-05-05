@@ -24,6 +24,7 @@ public class ElevatorManager : MonoBehaviour
     [SerializeField] Material[] doorRadarColors;
     [SerializeField] GameObject doorRadar;
 
+
     void Start()
     {
         //switch (doorLocked)
@@ -41,6 +42,7 @@ public class ElevatorManager : MonoBehaviour
 
         keyPadComponent = keyPadParentGO.GetComponent<ElevatorKeypad>();
         keyPadComponent.KeyPadDelegate += OpenElevator;
+        
     }
     private void OpenElevator()
     {
@@ -74,6 +76,7 @@ public class ElevatorManager : MonoBehaviour
             keypadKeypad.SetActive(true);
             keyPadHidden = false;
         }
+        
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

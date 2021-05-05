@@ -8,6 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using System;
+using UnityEngine.SceneManagement;
 
 public class EnemyController : MonoBehaviour
 {
@@ -20,10 +22,17 @@ public class EnemyController : MonoBehaviour
     [SerializeField] public PlayerAIDestination[] playerDestinations;
     [SerializeField] float distanceRight;
     [SerializeField] float distanceLeft;
+    [SerializeField] float distanceTop;
+    [SerializeField] float distanceBottom;
+    public float[] playerPaths = new float[4];
+    public bool pivoting = false;
+    public int health = 2;
+    public bool canAttack = true;
+    public bool isDead;
     [Space]
 
     [Header("Waypoint Information")]
-    private List<Waypoint> individualRoute;
+    public List<Waypoint> individualRoute;
     [SerializeField] public AIDestinationSetter aiDestinationSetter;
     [SerializeField] AIPath steeringTarget;
     private int currentWaypoint;
@@ -54,8 +63,12 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         currentWaypoint = 0;
-        GetWaypointRoute();
-        SetFirstWaypointAsTarget();
+        if(SceneManager.GetActiveScene().buildIndex < 8)
+        {
+            GetWaypointRoute();
+            SetFirstWaypointAsTarget();
+        }
+        
         GameManager.instance.onNotChasingAnymore += SetNextWaypointAsTarget;
         //EnterExitBroker.PlayerEntersBuilding += RadarCheckEnter; observer pattern example
         //EnterExitBroker.PlayerExitsBuilding += RadarCheckExit;
@@ -72,57 +85,162 @@ public class EnemyController : MonoBehaviour
                 stunInProgress = false;
             }
         }
-        CalculateEnemyMovement();
+
+        if (!animator.GetBool("FaceRight") && !animator.GetBool("FaceLeft") && !animator.GetBool("FaceUp") && !animator.GetBool("FaceDown"))
+        {
+            animator.SetBool("FaceDown", true);
+        }
+        if (pivoting)
+        {
+            CalculateEnemyPivot();
+            pivoting = false;
+        }
+        else
+        {
+
+            CalculateEnemyMovement();
+        }
         animator.SetFloat("Horizontal", xValue);
         animator.SetFloat("Vertical", yValue);
         animator.SetFloat("Magnitude", enemyMagnitude);
 
     }
 
+
+
     private void CalculateEnemyMovement()
     {
-        steerX = aiDestinationSetter.target.transform.position.x;
-        steerY = aiDestinationSetter.target.transform.position.y;
-        offsetX = transform.position.x - steerX;
-        offsetY = transform.position.y - steerY;
+        if (aiDestinationSetter.target)
+        {
+            steerX = aiDestinationSetter.target.transform.position.x;
+            steerY = aiDestinationSetter.target.transform.position.y;
+            offsetX = transform.position.x - steerX;
+            offsetY = transform.position.y - steerY;
 
-        if (offsetX > -.9 && offsetX < .9)
-        {
-            xValue = 0;
-        }
-        else if (offsetX < 0)
-        {
-            xValue = 1;
-        }
-        else if (offsetX > 0)
-        {
-            xValue = -1;
-        }
+            if (offsetX > -.9 && offsetX < .9)
+            {
+                xValue = 0;
+            }
+            else if (offsetX < 0)
+            {
+                xValue = 1;
+                animator.SetBool("NoInput", false);
+                animator.SetBool("FaceRight", true);
+                animator.SetBool("FaceLeft", false);
+                animator.SetBool("FaceUp", false);
+                animator.SetBool("FaceDown", false);
+            }
+            else if (offsetX > 0)
+            {
+                xValue = -1;
+                animator.SetBool("NoInput", false);
+                animator.SetBool("FaceLeft", true);
+                animator.SetBool("FaceRight", false);
+                animator.SetBool("FaceUp", false);
+                animator.SetBool("FaceDown", false);
+            }
 
-        if (offsetY > -.9 && offsetY < .9)
-        {
-            yValue = 0;
-        }
-        else if (offsetY < 0)
-        {
-            yValue = 1;
-        }
-        else if (offsetY > 0)
-        {
-            yValue = -1;
-        }
-        else
-        {
-            yValue = 0;
-        }
+            if (offsetY > -.9 && offsetY < .9)
+            {
+                yValue = 0;
+                if (xValue == 0)
+                {
+                    animator.SetBool("NoInput", true);
+                }
+            }
+            else if (offsetY < 0)
+            {
+                yValue = 1;
+                if (xValue == 0)
+                {
+                    animator.SetBool("NoInput", false);
+                    animator.SetBool("FaceLeft", false);
+                    animator.SetBool("FaceRight", false);
+                    animator.SetBool("FaceUp", true);
+                    animator.SetBool("FaceDown", false);
+                }
+            }
+            else if (offsetY > 0)
+            {
+                yValue = -1;
+                if (xValue == 0)
+                {
+                    animator.SetBool("NoInput", false);
+                    animator.SetBool("FaceLeft", false);
+                    animator.SetBool("FaceRight", false);
+                    animator.SetBool("FaceUp", false);
+                    animator.SetBool("FaceDown", true);
+                }
+            }
+            else
+            {
+                yValue = 0;
+            }
 
-        if (offsetX < 0.5 && offsetX > -0.5 && offsetY < 0.5 && offsetY > -0.5)
-        {
-            enemyMagnitude = 0f;
-        }
-        else
-        {
             enemyMagnitude = transform.position.magnitude;
+            animator.SetFloat("Magnitude", enemyMagnitude);
+        }
+        
+    }
+
+    public void CalculateEnemyPivot()
+    {
+        enemyMagnitude = 0f;
+        animator.SetFloat("Magnitude", enemyMagnitude);
+    }
+
+    public void PauseWalking()
+    {
+        StartCoroutine(PauseWalkingRoutine());
+    }
+
+    IEnumerator PauseWalkingRoutine()
+    {
+        steeringTarget.canMove = false;
+        yield return new WaitForSeconds(2f);
+        steeringTarget.canMove = true;
+    }
+
+    public void Attack(Position playerPos)
+    {
+
+        switch (playerPos)
+        {
+            case Position.North:
+                animator.SetBool("IsPunching", true);
+
+                animator.SetBool("FaceLeft", false);
+                animator.SetBool("FaceRight", false);
+                animator.SetBool("FaceUp", false);
+                animator.SetBool("FaceDown", false);
+                animator.SetBool("FaceDown", true);
+                break;
+            case Position.South:
+                animator.SetBool("IsPunching", true);
+                animator.SetBool("FaceLeft", false);
+                animator.SetBool("FaceRight", false);
+                animator.SetBool("FaceUp", false);
+                animator.SetBool("FaceDown", false);
+                animator.SetBool("FaceUp", true);
+                break;
+            case Position.East:
+                animator.SetBool("IsPunching", true);
+                animator.SetBool("FaceLeft", false);
+                animator.SetBool("FaceRight", false);
+                animator.SetBool("FaceUp", false);
+                animator.SetBool("FaceDown", false);
+                animator.SetBool("FaceLeft", true);
+                break;
+            case Position.West:
+                animator.SetBool("IsPunching", true);
+                animator.SetBool("FaceLeft", false);
+                animator.SetBool("FaceRight", false);
+                animator.SetBool("FaceUp", false);
+                animator.SetBool("FaceDown", false);
+                animator.SetBool("FaceRight", true);
+                break;
+            default:
+                break;
         }
     }
 
@@ -145,15 +263,19 @@ public class EnemyController : MonoBehaviour
 
     public void SetNextWaypointAsTarget()
     {
-        if (individualRoute != null)
+        if (aiDestinationSetter.target)
         {
-            currentWaypoint++;
-            if (currentWaypoint >= individualRoute.Count)
+            if (individualRoute != null)
             {
-                currentWaypoint = 0;
+                currentWaypoint++;
+                if (currentWaypoint >= individualRoute.Count)
+                {
+                    currentWaypoint = 0;
+                }
+                aiDestinationSetter.target = individualRoute[currentWaypoint].transform;
             }
-            aiDestinationSetter.target = individualRoute[currentWaypoint].transform;
         }
+        
     }
 
     public void GenerateDestination()
@@ -167,19 +289,52 @@ public class EnemyController : MonoBehaviour
         {
             playerDestinations = FindObjectsOfType<PlayerAIDestination>();
             distanceRight = Vector2.Distance(this.transform.position, playerDestinations[0].transform.position);
+            playerPaths[0] = distanceRight;
             distanceLeft = Vector2.Distance(this.transform.position, playerDestinations[1].transform.position);
-            if (distanceRight < distanceLeft)
+            playerPaths[1] = distanceLeft;
+            distanceTop = Vector2.Distance(this.transform.position, playerDestinations[2].transform.position);
+            playerPaths[2] = distanceTop;
+            distanceBottom = Vector2.Distance(this.transform.position, playerDestinations[3].transform.position);
+            playerPaths[3] = distanceBottom;
+            float smallestValue = 0;
+            int positionIndex = 0;
+            for(int i = 0; i < 4; i++)
             {
-                aiDestinationSetter.target = playerDestinations[0].transform;
+                if(i == 0)
+                {
+                    smallestValue = playerPaths[i];
+                    positionIndex = i;
+                }
+                else if (playerPaths[i] < smallestValue)
+                {
+                    smallestValue = playerPaths[i];
+                    positionIndex = i;
+                }
             }
-            else
+
+            switch (positionIndex)
             {
-                aiDestinationSetter.target = playerDestinations[1].transform;
+                case 0:
+                    aiDestinationSetter.target = playerDestinations[0].transform;
+                    break;
+                case 1:
+                    aiDestinationSetter.target = playerDestinations[1].transform;
+                    break;
+                case 2:
+                    aiDestinationSetter.target = playerDestinations[2].transform;
+                    break;
+                case 3:
+                    aiDestinationSetter.target = playerDestinations[3].transform;
+                    break;
+                default:
+                    break;
             }
             yield return new WaitForSeconds(2f);
             yield return StartCoroutine(GenerateShortestDestination());
         }
     }
+
+    
 
     //#region Radar Checking
     //private void RadarCheckEnter()

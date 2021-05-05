@@ -5,6 +5,7 @@
 ////////////////////////////////////////////////////////////////////////////
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerLost : MonoBehaviour
 {
@@ -15,25 +16,26 @@ public class PlayerLost : MonoBehaviour
     [SerializeField] GameObject radarColor;
 
     [Header("ChaseCinematics")]
-    [SerializeField] GameObject ui_chase_canvas;
+    //[SerializeField] GameObject ui_chase_canvas;
     [SerializeField] Animator ui_image_animator;
-    [SerializeField] AudioSource playerAudioSource;
+    //[SerializeField] AudioSource playerAudioSource;
     [SerializeField] GameObject parentEnemy;
     [SerializeField] GameObject radar;
  
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !gameObject.CompareTag("Alien"))
+        if (collision.CompareTag("PlayerPoint") && !gameObject.CompareTag("Alien") && SceneManager.GetActiveScene().buildIndex < 8)
         {
             GameManager.instance.beingChased = false;
             playerFound.SetActive(true);
             enemyAttack.SetActive(false);
             getStunned.SetActive(false);
             radarColor.GetComponent<SpriteRenderer>().color = Color.green;
+
             gameObject.GetComponentInParent<EnemyController>().SetNextWaypointAsTarget();
             radar.SetActive(true);
-            playerAudioSource.Stop();
-            ui_chase_canvas.SetActive(false);
+            //playerAudioSource.Stop();
+            //ui_chase_canvas.SetActive(false);
             gameObject.SetActive(false);
         }
     }

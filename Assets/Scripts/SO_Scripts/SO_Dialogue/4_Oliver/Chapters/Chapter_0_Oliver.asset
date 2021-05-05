@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Chapter_0_Oliver
   m_EditorClassIdentifier: 
   chapter: Chapter_0_Oliver
-  sectionDialogues: []
+  sectionDialogues:
+  - {fileID: 0}

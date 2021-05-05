@@ -15,6 +15,7 @@ public class VentScrews : MonoBehaviour
     int blScrew;
     int brScrew;
     int unscrewed = 0;
+   
 
     public void IncrementScrew(Button button)
     {
@@ -23,9 +24,12 @@ public class VentScrews : MonoBehaviour
         {
             case "TL":
                 tlScrew++;
+                RectTransform valueTL = button.GetComponent<RectTransform>();
+                valueTL.Rotate(new Vector3(0, 0, -45));
                 if (tlScrew == 10)
                 {
                     unscrewed++;
+                    
                     button.gameObject.SetActive(false);
                     if(unscrewed == 4)
                     {
@@ -36,6 +40,8 @@ public class VentScrews : MonoBehaviour
                 break;
             case "TR":
                 trScrew++;
+                RectTransform valueTR = button.GetComponent<RectTransform>();
+                valueTR.Rotate(new Vector3(0, 0, -45));
                 if (trScrew == 10)
                 {
                     unscrewed++;
@@ -49,6 +55,8 @@ public class VentScrews : MonoBehaviour
                 break;
             case "BL":
                 blScrew++;
+                RectTransform valueBL = button.GetComponent<RectTransform>();
+                valueBL.Rotate(new Vector3(0, 0, -45));
                 if (blScrew == 10)
                 {
                     unscrewed++;
@@ -62,6 +70,8 @@ public class VentScrews : MonoBehaviour
                 break;
             case "BR":
                 brScrew++;
+                RectTransform valueBR = button.GetComponent<RectTransform>();
+                valueBR.Rotate(new Vector3(0, 0, -45));
                 if (brScrew == 10)
                 {
                     unscrewed++;

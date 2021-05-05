@@ -39,6 +39,16 @@ public class NotificationBroker
         }
     }
 
+    public delegate void ItemRecievedFromDesk(MessageSO message); //subscribers subscribe
+    public static event ItemRecievedFromDesk itemRecievedFromDesk;
+    public static void ItemRecievedFromDeskCall(MessageSO message)
+    {
+        if (itemRecievedFromDesk != null)
+        {
+            itemRecievedFromDesk(message);
+        }
+    }
+
     public delegate void DoorIsLocked(MessageSO message); //subscribers subscribe
     public static event DoorIsLocked doorIsLocked;
     public static void DoorIsLockedCall(MessageSO message)

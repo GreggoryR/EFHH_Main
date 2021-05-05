@@ -28,6 +28,16 @@ public class SoundBroker : MonoBehaviour
         }
     }
 
-    //more to come
+    public delegate void OnEnemySoundPlayed(Enemy_Sounds enemy_Sound, EnemyNumber enemNumber);
+    public static event OnEnemySoundPlayed onEnemySoundPlayed;
+    public static void EnemySoundCall(Enemy_Sounds enemy_Sound, EnemyNumber enemyNumber) //this method is called by the publisher
+    {
+        if (onEnemySoundPlayed != null)
+        {
+            onEnemySoundPlayed(enemy_Sound, enemyNumber);
+        }
+    }
+
+
 
 }

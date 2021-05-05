@@ -16,5 +16,3 @@ MonoBehaviour:
   sectionDialogues:
   - {fileID: 11400000, guid: aafe27c6327043345b6b9bea72b55f5f, type: 2}
   - {fileID: 11400000, guid: 2d21015ff55362247917512043f33201, type: 2}
-  - {fileID: 11400000, guid: 3aedbaaeb8d5b8a42b36e219c8837e1b, type: 2}
-  - {fileID: 11400000, guid: 3fc31c3612148384aa42f249aa08aead, type: 2}

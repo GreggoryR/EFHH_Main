@@ -15,5 +15,3 @@ MonoBehaviour:
   chapter: Chapter_3_Jose
   sectionDialogues:
   - {fileID: 11400000, guid: cf34e17373cfda64fbd8cdc0383e6c8e, type: 2}
-  - {fileID: 11400000, guid: f4de8e81d8f25474585bffce7a21fb2d, type: 2}
-  - {fileID: 11400000, guid: fc28783d8cab35942ad5f00aad2d8dd8, type: 2}

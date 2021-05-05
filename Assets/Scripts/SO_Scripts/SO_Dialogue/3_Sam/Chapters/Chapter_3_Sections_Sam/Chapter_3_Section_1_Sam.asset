@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96b5ad94b754e734d8b30e1c2c69a0b5, type: 3}
+  m_Name: Chapter_3_Section_1_Sam
+  m_EditorClassIdentifier: 
+  sectionName: Name
+  storyDialoguesForSection:
+  - Oh, Bishop sent you for the elevator code?
+  - I hope this plan of his works out. We weren't supposed to be here that long.
+  - I heard the nurses talking about the code the other day.
+  - One of them said to another...
+  - '"It changed. Sam''s TV. Only on."'
+  - 'Whatever that means. '
+  - 'I can''t turn on my TV because they took my remote. '
+  - I think they put it in a drawer somewhere.
+  - If you find it, you'll be able to turn on my TV and see what channels are on.
+  - Good luck and I'll see you on the other side.

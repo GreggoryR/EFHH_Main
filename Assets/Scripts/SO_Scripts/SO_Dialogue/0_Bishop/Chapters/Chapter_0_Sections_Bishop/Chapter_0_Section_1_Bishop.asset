@@ -14,12 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sectionName: Name
   storyDialoguesForSection:
-  - You found my letter. Good. I need your help.
-  - "I don\u2019t know if you noticed, but the RAs here don\u2019t seem normal to
-    me."
+  - 'You found my letter! Great! '
+  - I need your help!
+  - "I don\u2019t know if you noticed... "
+  - "...but the nurses here don\u2019t seem normal to me..."
   - "Like they\u2019re ALIENS!"
-  - "Don\u2019t look at me like that. I\u2019m very serious. "
-  - 'I heard you tell your family that you wanted to escape. '
-  - "I\u2019m building this catapult to get us over the wall and out of here. "
-  - "We\u2019ll land in the pond on the other side. Of course."
+  - "What, I\u2019m serious! "
+  - ...
+  - What's this next to me? Well...
+  - This here is, uh, a...cat...a...pult. Yes? Yes!
+  - "I\u2019m building this CA-TA-PULT to get us over the wall and out of here. "
+  - 'Wait, what? I''m sorry? I''ve lost my color? '
+  - 'Well, shit. '
+  - I thought I was immune...
+  - Anyway, nothing I can do now...
   - 'First, can you help me find my screwdriver? '

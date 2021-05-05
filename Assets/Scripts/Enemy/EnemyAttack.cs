@@ -17,7 +17,7 @@ public class EnemyAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("PlayerReceiveDamage") && GameManager.instance.beingChased)
+        if (collision.CompareTag("PlayerReceiveDamage") && GameManager.instance.storyMoment)
         {
             canAttack = true;
             if (!attckInProgress)

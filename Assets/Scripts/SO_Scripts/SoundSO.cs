@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum UI_Sounds { main_Start, main_Controls, item_Hud, pause_Hud, item_Select, item_Use, inventory_Exit, resume, main_Return };
-public enum Player_Sounds { step_First, step_Basement, step_Outside, punch, item_Pickup, chase_sigh, damage_Recieved, drinks_coffee, takes_medicine };
+public enum Player_Sounds { step_First, step_Basement, step_Outside, throwPunch, punchHit, superHit, item_Pickup, chase_sigh, damage_Recieved, drinks_coffee, takes_medicine, getColor };
 
-public enum Enemy_Sounds { step_Orderly, attack_Orderly, grunt_Orderly, nevermind_Orderly,step_Alien, attack_Alien };
+public enum Enemy_Sounds { step_Orderly, attack_Orderly, grunt_Orderly, nevermind_Orderly,step_Alien, attack_Alien, bloodyMess };
 
 [CreateAssetMenu(menuName ="Sound Collection", fileName = "Sound Collection")]
 public class SoundSO : ScriptableObject
@@ -25,12 +25,15 @@ public class SoundSO : ScriptableObject
     [SerializeField] public AudioClip step_First;
     [SerializeField] public AudioClip step_Outside;
     [SerializeField] public AudioClip step_Basement;
-    [SerializeField] public AudioClip punch;
+    [SerializeField] public AudioClip throwPunch;
+    [SerializeField] public AudioClip punchHit;
+    [SerializeField] public AudioClip superHit;
     [SerializeField] public AudioClip item_Pickup;
     [SerializeField] public AudioClip chase_Sigh;
     [SerializeField] public AudioClip damage_Recieved;
     [SerializeField] public AudioClip drinks_Coffee;
     [SerializeField] public AudioClip takes_medicine;
+    [SerializeField] public AudioClip getColor;
     #endregion
 
     #region Bishop Sounds
@@ -46,6 +49,9 @@ public class SoundSO : ScriptableObject
 
     [SerializeField] public AudioClip step_Alien;
     [SerializeField] public AudioClip attack_Alien;
+
+    [SerializeField] public AudioClip bloodyMess;
+
     #endregion
 
     #region NPC Character Sounds

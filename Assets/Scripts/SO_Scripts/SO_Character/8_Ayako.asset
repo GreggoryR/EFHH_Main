@@ -15,3 +15,5 @@ MonoBehaviour:
   characterName: Ayako
   story: {fileID: 11400000, guid: 29a44b678b82d034cb123f737c7fe8b9, type: 2}
   givenItem: 1
+  itemThanks: []
+  nameNPC: 7

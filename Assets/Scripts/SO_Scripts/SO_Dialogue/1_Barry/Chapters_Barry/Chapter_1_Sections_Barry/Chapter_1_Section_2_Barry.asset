@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sectionName: B
   storyDialoguesForSection:
-  - Thanks for the beer!
-  - I used to drink this stuff all the time when I was younger.
+  - I gave you the wheel already! What more do you want?
+  - Leave me alone!

@@ -28,6 +28,24 @@ public class LevelChangeManager : MonoBehaviour
         DialogueManager.instance.onDialogueFinished -= LoadNextLevel;
     }
 
+    //public void RestartLevel()
+    //{
+    //    if (GameManager.instance.gameOver)
+    //    {
+    //        StoryManager.instance.canLoadNextLevel = false;
+    //        GameManager.instance.chapter++;
+    //        //look for current music and fade it out
+    //        //will need to prevent radar cam from being first found--uses GDFS
+    //        //AudioSource audio = FindObjectOfType<Camera>().GetComponent<AudioSource>(); //will change each level
+    //        StartCoroutine(FadeOutAudio(audioSource, .5f));
+    //        //fade out to black
+    //        fade.SetActive(true);
+    //        fade.GetComponent<FadeManager>().FadeOut();
+    //        //start loading
+    //        StartCoroutine(PauseBeforeLoad());
+    //    }
+    //}
+
     public void LoadNextLevel()
     {
         if (SceneManager.GetActiveScene().name.Equals("x_StartMenu") || StoryManager.instance.canLoadNextLevel)

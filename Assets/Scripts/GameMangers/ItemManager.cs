@@ -8,6 +8,7 @@
 ///////////////////////////////////////////////////////////////////////////
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -26,14 +27,16 @@ public class ItemManager : MonoBehaviour
     [SerializeField] ItemSO kwanFlowerItem;
     [SerializeField] ItemSO joseRopeItem;
     [SerializeField] ItemSO ayakoNoteItem;
-
+    
     enum Characters { Bishop, Barry, Zhao, Sam, Oliver, Kwan, Jose, Ayako, Afua }
     List<string> residentItemKeys = new List<string> { "BishopKey", "BarryWheel", "ZhaoBeer", "SamMatches", "OliverOxygen", "AyakoTelescope", "KwanRose", "JoseRope", "AyakoNote" };
     public Dictionary<string, ItemSO> residentItemCollection = new Dictionary<string, ItemSO>(9);
     public bool itemReturnedToPlayer;
+    public bool bishopColorBack = false;
 
     public delegate void TopHallwayDoorUnlockedEvent();
     public static TopHallwayDoorUnlockedEvent topHallwayDoorUnlocked;
+    [SerializeField] GameObject playerFound;
 
     private void Awake()
     {
@@ -57,6 +60,7 @@ public class ItemManager : MonoBehaviour
         {
             GameManager.instance.canMove = false;
             GameManager.instance.isTalking = true;
+            playerFound.SetActive(false);
             if (GameManager.instance.beingChased)
             {
                 GameManager.instance.StopChasing();
@@ -119,82 +123,125 @@ public class ItemManager : MonoBehaviour
     }
     private void ExchageItemsAndSayThanks(NPCInformationSO npc, ItemSO item)
     {
+        StoryManager.instance.checkIfNeedColorChange(npc.nameNPC, out bool colorValue);
         Characters character = (Characters)Enum.Parse(typeof(Characters), item.itemFor);
         GameManager.instance.chapterWithSections[GameManager.instance.chapter][(int)character]++;
         string[] characterThanks = npc.itemThanks[0].thanks;
         StoryManager.instance.canLoadNextLevel = false;
         itemReturnedToPlayer = true;
-        residentItemCollection.TryGetValue(item.itemInReturn, out ItemSO barryReturn);
-        ResidentGivesItem(barryReturn, characterThanks, false);
+        residentItemCollection.TryGetValue(item.itemInReturn, out ItemSO itemReturn);
+        ResidentGivesItem(itemReturn, characterThanks, false, colorValue, npc);
     }
     private void NoItemToPlayerandLoadNextLevel(NPCInformationSO npc)
     {
         StoryManager.instance.canLoadNextLevel = true;
         itemReturnedToPlayer = false;
-        DialogueManager.instance.ui_Inventory.SetActive(false);
-        string[] bishopThanks = npc.itemThanks[GameManager.instance.chapter].thanks;
-        string what = bishopThanks[0];
-        DialogueManager.instance.ui_Player.SetActive(true);
-        DialogueManager.instance.StartCoversation(bishopThanks, "Bishop", true);
+        if (!bishopColorBack)
+        {
+            DialogueManager.instance.ui_Inventory.SetActive(false);
+            NPCColorManager.instance.getColorBack(npc.nameNPC);
+            StartCoroutine(BishopDialogueAfterColorChange(npc));
+        }
+        else
+        {
+            DialogueManager.instance.ui_Inventory.SetActive(false);
+            string[] bishopThanks = npc.itemThanks[GameManager.instance.chapter].thanks;
+            string what = bishopThanks[0];
+            DialogueManager.instance.ui_Player.SetActive(true);
+            DialogueManager.instance.StartCoversation(bishopThanks, "Bishop", true);
+        }
+        
     }
+
+
+
     private void GiveItemToPlayerAndLoadNextLevel(NPCInformationSO npc, ItemSO item)
     {
+        StoryManager.instance.checkIfNeedColorChange(npc.nameNPC, out bool colorValue);
         StoryManager.instance.canLoadNextLevel = true;
         itemReturnedToPlayer = true;
         string[] bishopThanks = npc.itemThanks[GameManager.instance.chapter].thanks;
         string what = bishopThanks[0];
         residentItemCollection.TryGetValue(item.itemInReturn, out ItemSO bishopReturn);
-        ResidentGivesItem(bishopReturn, bishopThanks, true);
+        ResidentGivesItem(bishopReturn, bishopThanks, true, colorValue, npc);
     }
     //---Helper Methods----//
 
-    public void ResidentGivesItem(ItemSO item, string[] dialogue, bool nextChapter)
+    public void ResidentGivesItem(ItemSO item, string[] dialogue, bool nextChapter, bool colorChange, NPCInformationSO npc)
     {
         switch (item.itemFrom)
         {
             
             case "Kwan":
                 GameManager.instance.chapterWithSections[GameManager.instance.chapter][(int)Characters.Kwan]++;
-                DontLoadLevelAndGiveItem(item, dialogue, nextChapter);
+                DontLoadLevelAndGiveItem(item, dialogue, nextChapter, colorChange, npc);
             break;
             case "Jose":
                 GameManager.instance.chapterWithSections[GameManager.instance.chapter][(int)Characters.Jose]++;
-                DontLoadLevelAndGiveItem(item, dialogue, nextChapter);
+                DontLoadLevelAndGiveItem(item, dialogue, nextChapter, colorChange, npc);
             break;
             case "Ayako":
                 Characters ayako = (Characters)Enum.Parse(typeof(Characters), item.itemFor);
                 GameManager.instance.chapterWithSections[GameManager.instance.chapter][(int)Characters.Ayako]++;
-                DontLoadLevelAndGiveItem(item, dialogue, nextChapter);
+                DontLoadLevelAndGiveItem(item, dialogue, nextChapter, colorChange, npc);
             break;
             case "AyakoTelescope":
                 Characters ayakoTele = (Characters)Enum.Parse(typeof(Characters), item.itemFor);
                 GameManager.instance.chapterWithSections[GameManager.instance.chapter][(int)Characters.Ayako]++;
-                DontLoadLevelAndGiveItem(item, dialogue, nextChapter);
+                DontLoadLevelAndGiveItem(item, dialogue, nextChapter, colorChange, npc);
             break;
             default:
-            ResidentGivesGiftAndSaysDialogue(item.itemFrom, dialogue, item, nextChapter);
+            ResidentGivesGiftAndSaysDialogue(item.itemFrom, dialogue, item, nextChapter, colorChange, npc);
             break;
         }
     } 
-    private void DontLoadLevelAndGiveItem(ItemSO item, string[] dialogue, bool nextChapter)
+    private void DontLoadLevelAndGiveItem(ItemSO item, string[] dialogue, bool nextChapter, bool colorChange, NPCInformationSO npc)
     {
         StoryManager.instance.canLoadNextLevel = false;
         itemReturnedToPlayer = true;
-        ResidentGivesGiftAndSaysDialogue(item.itemFrom, dialogue, item, nextChapter);
+        ResidentGivesGiftAndSaysDialogue(item.itemFrom, dialogue, item, nextChapter, colorChange, npc);
     }
-    private void ResidentGivesGiftAndSaysDialogue(string characterName, string[] dialogue, ItemSO returnedItem, bool nextChapter) //resident gives gift
+    private void ResidentGivesGiftAndSaysDialogue(string characterName, string[] dialogue, ItemSO returnedItem, bool nextChapter, bool colorChange, NPCInformationSO npc) //resident gives gift
     {
-        DialogueManager.instance.ui_Inventory.SetActive(false);
         Inventory.instance.AddItem(returnedItem);
-        DialogueManager.instance.StartGiftCoversation(dialogue, characterName, returnedItem.recieveMessage, nextChapter);
-        DialogueManager.instance.ui_Player.SetActive(true);
-        Debug.Log("Recieved gift from " + characterName);
+        if (!colorChange && npc.nameNPC != NPCInformationSO.NPC.Kwan)
+        {
+            DialogueManager.instance.ui_Inventory.SetActive(false);
+            NPCColorManager.instance.getColorBack(npc.nameNPC);
+            StartCoroutine(NPCGiftDialogueAfterColorChange(npc, characterName, dialogue, returnedItem, nextChapter));
+        }
+        else
+        {
+            DialogueManager.instance.ui_Inventory.SetActive(false);
+            
+            DialogueManager.instance.StartGiftCoversation(dialogue, characterName, returnedItem.recieveMessageNPC, nextChapter);
+            DialogueManager.instance.ui_Player.SetActive(true);
+            Debug.Log("Recieved gift from " + characterName);
+        }
+        
     }
     private void ResidentAcceptsItem(string characterName, string[] dialogue, bool nextChapter) //resident recieves gift
     {
         DialogueManager.instance.ui_Inventory.SetActive(false);
         DialogueManager.instance.StartCoversation(dialogue, characterName, nextChapter);
         DialogueManager.instance.ui_Player.SetActive(true);
+    }
+
+    public IEnumerator NPCGiftDialogueAfterColorChange(NPCInformationSO npc, string characterName, string[] dialogue, ItemSO returnedItem, bool nextChapter)
+    {
+        yield return new WaitForSeconds(8f);
+        DialogueManager.instance.StartGiftCoversation(dialogue, characterName, returnedItem.recieveMessageNPC, nextChapter);
+        DialogueManager.instance.ui_Player.SetActive(true);
+        Debug.Log("Recieved gift from " + characterName);
+    }
+
+    public IEnumerator BishopDialogueAfterColorChange(NPCInformationSO npc)
+    {
+        yield return new WaitForSeconds(8f);
+        DialogueManager.instance.ui_Inventory.SetActive(false);
+        string[] thanks = npc.itemThanks[GameManager.instance.chapter].thanks;
+        DialogueManager.instance.ui_Player.SetActive(true);
+        DialogueManager.instance.StartCoversation(thanks, "Bishop", true);
     }
 
     //old methods

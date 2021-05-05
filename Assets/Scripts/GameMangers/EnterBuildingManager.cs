@@ -14,7 +14,7 @@ public class EnterBuildingManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("PlayerPoint"))
         {
             EnterExitBroker.PlayerEntersBuildingFunction();
             roofFade.SetActive(false);

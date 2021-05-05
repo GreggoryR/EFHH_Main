@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Kwan
   story: {fileID: 11400000, guid: 68785b272dc2bdd41a1869735e1c3956, type: 2}
+  givenItem: 0
+  itemThanks: []
+  nameNPC: 5

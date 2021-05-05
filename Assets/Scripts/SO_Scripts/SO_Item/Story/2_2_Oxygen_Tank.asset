@@ -21,6 +21,8 @@ MonoBehaviour:
   inventoryIcon: {fileID: 21300000, guid: dea43344543ff4d4d926d8db20a0d710, type: 3}
   inventorySelectedIcon: {fileID: 21300000, guid: 2ccd920f3b2912b4dbf681e7817f0907,
     type: 3}
-  recieveMessage: {fileID: 11400000, guid: d6185a2f13751f04b8c0ab30bf252a6f, type: 2}
+  recieveMessageNPC: {fileID: 11400000, guid: d6185a2f13751f04b8c0ab30bf252a6f, type: 2}
+  recieveMessageDesk: {fileID: 0}
+  recieveMessageGround: {fileID: 0}
   itemThanks: 
   itemInReturn: 

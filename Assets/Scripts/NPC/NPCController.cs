@@ -6,19 +6,118 @@
 
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NPCController : MonoBehaviour
 {
     bool canInteract = false;
     [SerializeField] NPCInformationSO npcInfo;
     [SerializeField] GameObject npcIntroduction;
+    [SerializeField] GameObject npcColor;
     bool hasMet = false;
     [SerializeField] GameObject playerButtonCanvas;
-
+    [SerializeField] GameObject uiItems;
+    [SerializeField] GameObject uiPause;
+    [SerializeField] Animator animator;
 
     public void Start()
     {
         NotificationBroker.turnOffButtons += TurnOffPlayerButton;
+        switch (npcInfo.nameNPC)
+        {
+            case NPCInformationSO.NPC.Bishop:
+                if (SceneManager.GetActiveScene().name.Equals("Chapter_0_Floor_One"))
+                {
+                    animator.Play("bishop_bw");
+                }
+                else
+                {
+                    animator.Play("bishop_color_game");
+                }
+                break;
+            case NPCInformationSO.NPC.Zhao:
+                if (SceneManager.GetActiveScene().buildIndex < 3)
+                {
+                    animator.Play("Zhao_idle");
+                }
+                else
+                {
+                    animator.Play("zhao_color_game");
+                }
+                break;
+            case NPCInformationSO.NPC.Barry:
+                if (SceneManager.GetActiveScene().buildIndex < 3)
+                {
+                    animator.Play("barry_idle");
+                }
+                else
+                {
+                    animator.Play("barry_color_game");
+                }
+                break;
+            case NPCInformationSO.NPC.Sam:
+                if (SceneManager.GetActiveScene().buildIndex < 3)
+                {
+                    animator.Play("sam_idle");
+                }
+                else
+                {
+                    animator.Play("sam_color_game");
+                }
+                break;
+            case NPCInformationSO.NPC.Oliver:
+                if (SceneManager.GetActiveScene().buildIndex < 4)
+                {
+                    animator.Play("oliver_idle_bw");
+                }
+                else
+                {
+                    animator.Play("oliver_color_game");
+                }
+                break;
+            case NPCInformationSO.NPC.Kwan:
+                if (SceneManager.GetActiveScene().buildIndex < 4)
+                {
+                    animator.Play("kwan_idle_bw");
+                }
+                else
+                {
+                    animator.Play("kwan_color_game");
+                }
+                break;
+            case NPCInformationSO.NPC.Jose:
+                if (SceneManager.GetActiveScene().buildIndex < 6)
+                {
+                    animator.Play("bishop_bw");
+                }
+                else
+                {
+                    animator.Play("bishop_color_game");
+                }
+                break;
+            case NPCInformationSO.NPC.Ayako:
+                if (SceneManager.GetActiveScene().buildIndex < 8)
+                {
+                    animator.Play("bishop_bw");
+                }
+                else
+                {
+                    animator.Play("bishop_color_game");
+                }
+                break;
+            case NPCInformationSO.NPC.Afua:
+                if (SceneManager.GetActiveScene().buildIndex < 8)
+                {
+                    animator.Play("bishop_bw");
+                }
+                else
+                {
+                    animator.Play("bishop_color_game");
+                }
+                break;
+            default:
+                break;
+        }
     }
     private void OnDestroy()
     {
@@ -31,6 +130,65 @@ public class NPCController : MonoBehaviour
         {
             GameManager.instance.canMove = false;
             playerButtonCanvas.SetActive(false);
+            switch (npcInfo.nameNPC)
+            {
+                case NPCInformationSO.NPC.Bishop:
+                    if (StoryManager.instance.hasMetBishop)
+                    {
+                        hasMet = true;
+                    }
+                    break;
+                case NPCInformationSO.NPC.Zhao:
+                    if (StoryManager.instance.hasMetZhao)
+                    {
+                        hasMet = true;
+                    }
+                    break;
+                case NPCInformationSO.NPC.Barry:
+                    if (StoryManager.instance.hasMetBarry)
+                    {
+                        hasMet = true;
+                    }
+                    break;
+                case NPCInformationSO.NPC.Sam:
+                    if (StoryManager.instance.hasMetSam)
+                    {
+                        hasMet = true;
+                    }
+                    break;
+                case NPCInformationSO.NPC.Oliver:
+                    if (StoryManager.instance.hasMetOliver)
+                    {
+                        hasMet = true;
+                    }
+                    break;
+                case NPCInformationSO.NPC.Kwan:
+                    if (StoryManager.instance.hasMetKwan)
+                    {
+                        hasMet = true;
+                    }
+                    break;
+                case NPCInformationSO.NPC.Jose:
+                    if (StoryManager.instance.hasMetJose)
+                    {
+                        hasMet = true;
+                    }
+                    break;
+                case NPCInformationSO.NPC.Ayako:
+                    if (StoryManager.instance.hasMetAyako)
+                    {
+                        hasMet = true;
+                    }
+                    break;
+                case NPCInformationSO.NPC.Afua:
+                    if (StoryManager.instance.hasMetAfua)
+                    {
+                        hasMet = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
             if (!hasMet)
             {
                 StartCoroutine(IntroAndConversation());
@@ -43,10 +201,45 @@ public class NPCController : MonoBehaviour
     }
     IEnumerator IntroAndConversation()
     {
+        uiItems.SetActive(false);
+        uiPause.SetActive(false);
         npcIntroduction.SetActive(true);
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(3.15f);
         npcIntroduction.SetActive(false);
-        yield return new WaitForSeconds(.2f);
+        uiItems.SetActive(true);
+        uiPause.SetActive(true);
+        switch (npcInfo.nameNPC)
+        {
+            case NPCInformationSO.NPC.Bishop:
+                StoryManager.instance.hasMetBishop = true;
+                break;
+            case NPCInformationSO.NPC.Zhao:
+                StoryManager.instance.hasMetZhao = true;
+                break;
+            case NPCInformationSO.NPC.Barry:
+                StoryManager.instance.hasMetBarry = true;
+                break;
+            case NPCInformationSO.NPC.Sam:
+                StoryManager.instance.hasMetSam = true;
+                break;
+            case NPCInformationSO.NPC.Oliver:
+                StoryManager.instance.hasMetOliver = true;
+                break;
+            case NPCInformationSO.NPC.Kwan:
+                StoryManager.instance.hasMetKwan = true;
+                break;
+            case NPCInformationSO.NPC.Jose:
+                StoryManager.instance.hasMetJose = true;
+                break;
+            case NPCInformationSO.NPC.Ayako:
+                StoryManager.instance.hasMetAyako = true;
+                break;
+            case NPCInformationSO.NPC.Afua:
+                StoryManager.instance.hasMetAfua = true;
+                break;
+            default:
+                break;
+        }
         HaveConversation();
     }
     private void HaveConversation()
@@ -57,50 +250,59 @@ public class NPCController : MonoBehaviour
             {
                 playerButtonCanvas.SetActive(false);
                 GameManager.instance.isTalking = true;
+                GameManager.instance.storyMoment = true;
                 GameManager.instance.beingChased = false;
                 GameManager.instance.StopChasing();
                 string[] chapterSectionDialogue = GetChapterSectionDialogue();
-
+                //Ayakocolor
                 ItemManager.instance.residentItemCollection.TryGetValue("AyakoTelescope", out ItemSO ayakoTeleReturnedItem);
-                ItemManager.instance.ResidentGivesItem(ayakoTeleReturnedItem, chapterSectionDialogue, false);
+                StoryManager.instance.checkIfNeedColorChange(npcInfo.nameNPC, out bool colorValue);
+                ItemManager.instance.ResidentGivesItem(ayakoTeleReturnedItem, chapterSectionDialogue, false, colorValue, npcInfo);
             } 
             else 
             {
                 playerButtonCanvas.SetActive(false);
                 npcInfo.givenItem = true;
                 GameManager.instance.isTalking = true;
+                GameManager.instance.storyMoment = true;
                 GameManager.instance.beingChased = false;
                 GameManager.instance.StopChasing();
                 string[] chapterSectionDialogue = GetChapterSectionDialogue();
                 ItemManager.instance.residentItemCollection.TryGetValue("AyakoNote", out ItemSO ayakoNote);
-                ItemManager.instance.ResidentGivesItem(ayakoNote, chapterSectionDialogue, false);
+                StoryManager.instance.checkIfNeedColorChange(npcInfo.nameNPC, out bool colorValue);
+                ItemManager.instance.ResidentGivesItem(ayakoNote, chapterSectionDialogue, false, colorValue, npcInfo);
             }
         }
         else if (npcInfo.characterName.Equals("Jose"))
         {
             playerButtonCanvas.SetActive(false);
             GameManager.instance.isTalking = true;
+            GameManager.instance.storyMoment = true;
             GameManager.instance.beingChased = false;
             GameManager.instance.talkedToJose = true;
             GameManager.instance.StopChasing();
             string[] chapterSectionDialogue = GetChapterSectionDialogue();
             ItemManager.instance.residentItemCollection.TryGetValue("JoseRope", out ItemSO joseRopeReturnedItem);
-            ItemManager.instance.ResidentGivesItem(joseRopeReturnedItem, chapterSectionDialogue, false);
+            StoryManager.instance.checkIfNeedColorChange(npcInfo.nameNPC, out bool colorValue);
+            ItemManager.instance.ResidentGivesItem(joseRopeReturnedItem, chapterSectionDialogue, false, colorValue, npcInfo);
         }
         else if (npcInfo.characterName.Equals("Kwan"))
         {
             playerButtonCanvas.SetActive(false);
             GameManager.instance.isTalking = true;
+            GameManager.instance.storyMoment = true;
             GameManager.instance.beingChased = false;
             GameManager.instance.StopChasing();
             string[] chapterSectionDialogue = GetChapterSectionDialogue();
             ItemManager.instance.residentItemCollection.TryGetValue("KwanRose", out ItemSO kwanRoseReturnedItem);
-            ItemManager.instance.ResidentGivesItem(kwanRoseReturnedItem, chapterSectionDialogue, false);
+            //StoryManager.instance.checkIfNeedColorChange(npcInfo.nameNPC, out bool colorValue);
+            ItemManager.instance.ResidentGivesItem(kwanRoseReturnedItem, chapterSectionDialogue, false, false, npcInfo);
         }
         else
         {
             playerButtonCanvas.SetActive(false);
             GameManager.instance.isTalking = true;
+            GameManager.instance.storyMoment = true;
             GameManager.instance.beingChased = false;
             GameManager.instance.StopChasing();
             string[] chapterSectionDialogue = GetChapterSectionDialogue();
@@ -137,6 +339,7 @@ public class NPCController : MonoBehaviour
         if (collision.CompareTag("PlayerFoundCollider"))
         {
             canInteract = false;
+            GameManager.instance.nextToNPC = false;
             GameManager.instance.isTalking = false;
             GameManager.instance.currentNPC = null;
             playerButtonCanvas.SetActive(false);

@@ -24,6 +24,8 @@ public class NotificationManager : MonoBehaviour
     [SerializeField] GameObject recieveItemNotifcaton;
     [SerializeField] GameObject recieveItemText;
 
+    [SerializeField] MessageSO startMessageInformation;
+
     enum ActiveNotification { gameStart, chapterStart, doorLocked, receiveItem};
     ActiveNotification activeNotication;
 
@@ -44,6 +46,16 @@ public class NotificationManager : MonoBehaviour
         NotificationBroker.newChapterBegins += NewChapterNotification;
         NotificationBroker.itemRecievedFromNPC += RecieveItemNotification;
         NotificationBroker.doorIsLocked += DoorLockedNotification;
+        NotificationBroker.itemRecievedFromDesk += RecieveItemNotification;
+    }
+
+    private void OnDestroy()
+    {
+        NotificationBroker.gameStartBegins -= GameStartNotification;
+        NotificationBroker.newChapterBegins -= NewChapterNotification;
+        NotificationBroker.itemRecievedFromNPC -= RecieveItemNotification;
+        NotificationBroker.doorIsLocked -= DoorLockedNotification;
+        NotificationBroker.itemRecievedFromDesk -= RecieveItemNotification;
     }
 
     void Start()
@@ -54,6 +66,7 @@ public class NotificationManager : MonoBehaviour
 
     private void GameStartNotification(MessageSO message)
     {
+        this.message = message.message;
         if (!notificationIsOpen)
         {
             activeNotication = ActiveNotification.gameStart;
@@ -64,6 +77,7 @@ public class NotificationManager : MonoBehaviour
 
     private void NewChapterNotification(MessageSO message)
     {
+        this.message = message.message;
         if (!notificationIsOpen)
         {
             activeNotication = ActiveNotification.chapterStart;
@@ -73,6 +87,7 @@ public class NotificationManager : MonoBehaviour
 
     private void DoorLockedNotification(MessageSO message)
     {
+        this.message = message.message;
         if (!notificationIsOpen)
         {
             activeNotication = ActiveNotification.doorLocked;
@@ -81,6 +96,7 @@ public class NotificationManager : MonoBehaviour
     }
     private void RecieveItemNotification(MessageSO message)
     {
+        this.message = message.message;
         if (!notificationIsOpen)
         {
             activeNotication = ActiveNotification.receiveItem;
@@ -102,8 +118,8 @@ public class NotificationManager : MonoBehaviour
         switch (version)
         {
             case ActiveNotification.gameStart:
-                gameStartNotifcaton.SetActive(true);
-                gameStartText.GetComponent<TMP_Text>().text = message.message;
+                //gameStartNotifcaton.SetActive(true);
+                //gameStartText.GetComponent<TMP_Text>().text = message.message;
                 break;
             case ActiveNotification.chapterStart:
                 chapterStartNotifcaton.SetActive(true);
@@ -170,11 +186,11 @@ public class NotificationManager : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+
+    public void GameStartLetter()
     {
-        NotificationBroker.gameStartBegins -= GameStartNotification;
-        NotificationBroker.newChapterBegins -= NewChapterNotification;
-        NotificationBroker.itemRecievedFromNPC -= RecieveItemNotification;
-        NotificationBroker.doorIsLocked -= DoorLockedNotification;
+        gameStartNotifcaton.SetActive(true);
+        gameStartText.GetComponent<TMP_Text>().text = startMessageInformation.message;
     }
+
 }

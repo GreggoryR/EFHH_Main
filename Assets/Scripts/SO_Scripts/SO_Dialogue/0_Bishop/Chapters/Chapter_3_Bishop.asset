@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Chapter_3_Bishop
   m_EditorClassIdentifier: 
   chapter: chapter
-  sectionDialogues: []
+  sectionDialogues:
+  - {fileID: 11400000, guid: 2a7c73cde25965742b8ed40c0ac322ea, type: 2}

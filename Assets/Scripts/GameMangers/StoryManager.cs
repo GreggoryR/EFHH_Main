@@ -4,6 +4,7 @@
 //Description : Class for story moments
 ////////////////////////////////////////////////////////////////////////////
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,11 +18,32 @@ public class StoryManager : MonoBehaviour
     public bool chapterFourStarted = false;
     public bool chapterFiveStarted = false;
 
+    public bool hasMetBishop = false;
+    public bool hasMetZhao = false;
+    public bool hasMetBarry = false;
+    public bool hasMetSam = false;
+    public bool hasMetOliver = false;
+    public bool hasMetKwan = false;
+    public bool hasMetJose = false;
+    public bool hasMetAyako = false;
+    public bool hasMetAfua = false;
+
+    public bool gotColorBishop = false;
+    public bool gotColorZhao = false;
+    public bool gotColorBarry = false;
+    public bool gotColorSam = false;
+    public bool gotColorOliver = false;
+    public bool gotColorKwan = false;
+    public bool gotColorJose = false;
+    public bool gotColorAyako = false;
+    public bool gotColorAfua = false;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -66,5 +88,140 @@ public class StoryManager : MonoBehaviour
             break;
         }
         return -1;
+    }
+
+    public void checkIfNeedColorChange(NPCInformationSO.NPC nameNPC, out bool colorValue)
+    {
+        switch (nameNPC)
+        {
+            case NPCInformationSO.NPC.Bishop:
+                if (gotColorBishop)
+                {
+                    colorValue = true;
+                } else
+                {
+                    colorValue = false;
+                }
+                break;
+            case NPCInformationSO.NPC.Zhao:
+                if (gotColorBishop)
+                {
+                    colorValue = true;
+                }
+                else
+                {
+                    colorValue = false;
+                }
+                break;
+            case NPCInformationSO.NPC.Barry:
+                if (gotColorBishop)
+                {
+                    colorValue = true;
+                }
+                else
+                {
+                    colorValue = false;
+                }
+                break;
+            case NPCInformationSO.NPC.Sam:
+                if (gotColorBishop)
+                {
+                    colorValue = true;
+                }
+                else
+                {
+                    colorValue = false;
+                }
+                break;
+            case NPCInformationSO.NPC.Oliver:
+                if (gotColorBishop)
+                {
+                    colorValue = true;
+                }
+                else
+                {
+                    colorValue = false;
+                }
+                break;
+            case NPCInformationSO.NPC.Kwan:
+                if (gotColorBishop)
+                {
+                    colorValue = true;
+                }
+                else
+                {
+                    colorValue = false;
+                }
+                break;
+            case NPCInformationSO.NPC.Jose:
+                if (gotColorBishop)
+                {
+                    colorValue = true;
+                }
+                else
+                {
+                    colorValue = false;
+                }
+                break;
+            case NPCInformationSO.NPC.Ayako:
+                if (gotColorBishop)
+                {
+                    colorValue = true;
+                }
+                else
+                {
+                    colorValue = false;
+                }
+                break;
+            case NPCInformationSO.NPC.Afua:
+                if (gotColorBishop)
+                {
+                    colorValue = true;
+                }
+                else
+                {
+                    colorValue = false;
+                }
+                break;
+            default:
+                colorValue = false;
+                break;
+        }
+    }
+
+    public void ColorChanged(NPCInformationSO.NPC nameNPC)
+    {
+        switch (nameNPC)
+        {
+            case NPCInformationSO.NPC.Bishop:
+                gotColorBishop = true;
+                break;
+            case NPCInformationSO.NPC.Zhao:
+                gotColorZhao = true;
+                break;
+            case NPCInformationSO.NPC.Barry:
+                gotColorBarry = true;
+                break;
+            case NPCInformationSO.NPC.Sam:
+                gotColorSam = true;
+                break;
+            case NPCInformationSO.NPC.Oliver:
+                gotColorOliver = true;
+                break;
+            case NPCInformationSO.NPC.Kwan:
+                gotColorKwan = true;
+                break;
+            case NPCInformationSO.NPC.Jose:
+                gotColorJose = true;
+                break;
+            case NPCInformationSO.NPC.Ayako:
+                gotColorAyako = true;
+                break;
+            case NPCInformationSO.NPC.Afua:
+                gotColorAfua = true;
+                break;
+            default:
+                break;
+        }
     }
 }

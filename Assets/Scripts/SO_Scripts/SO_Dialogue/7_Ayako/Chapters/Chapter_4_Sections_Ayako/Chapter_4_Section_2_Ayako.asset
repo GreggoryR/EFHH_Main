@@ -15,4 +15,5 @@ MonoBehaviour:
   sectionName: Name
   storyDialoguesForSection:
   - "Did she like it? Good. I\u2019m happy. "
-  - "Here, take this. I\u2019ll see you on the other side. "
+  - Here, take this.
+  - "I\u2019ll see you on the other side. "

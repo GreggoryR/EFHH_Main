@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Chapter_5_Barry
   m_EditorClassIdentifier: 
   chapter: Chapter_5_Barry
-  sectionDialogues: []
+  sectionDialogues:
+  - {fileID: 11400000, guid: 63ecd7bbc390ff14a988dc97c820a764, type: 2}

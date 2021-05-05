@@ -21,23 +21,27 @@ MonoBehaviour:
   inventory_Exit: {fileID: 8300000, guid: b2663bfde252fd543b29557045b1cb08, type: 3}
   resume: {fileID: 8300000, guid: 6a7aeaf730586b0429c8aa8ed72255e6, type: 3}
   main_Return: {fileID: 0}
-  step_First: {fileID: 8300000, guid: d791e20a3dd9bd847951e6d01787ccc9, type: 3}
+  step_First: {fileID: 8300000, guid: f0e92f201f05b764aada0b0a5f22359c, type: 3}
   step_Outside: {fileID: 0}
   step_Basement: {fileID: 0}
-  punch: {fileID: 0}
+  throwPunch: {fileID: 8300000, guid: b1870acaa13a2d04389847331904e730, type: 3}
+  punchHit: {fileID: 8300000, guid: dafb8cc4c7e133c44b3034cd2637ef5c, type: 3}
+  superHit: {fileID: 8300000, guid: 3f18f66bc0e5ff44c989d5c63a9c3532, type: 3}
   item_Pickup: {fileID: 8300000, guid: 650928025ee948a478c7cd818f85c25c, type: 3}
   chase_Sigh: {fileID: 0}
   damage_Recieved: {fileID: 0}
   drinks_Coffee: {fileID: 0}
   takes_medicine: {fileID: 0}
+  getColor: {fileID: 8300000, guid: 677264f1084c88545bbfaa1fbad79d3b, type: 3}
   step_Bishop: {fileID: 0}
   tool_Sounds: {fileID: 0}
-  step_Orderly: {fileID: 0}
+  step_Orderly: {fileID: 8300000, guid: e296607562cfb3448bc8429d2e790f83, type: 3}
   attack_Orderly: {fileID: 0}
   grunt_Orderly: {fileID: 0}
   nevermind_Orderly: {fileID: 0}
   step_Alien: {fileID: 0}
   attack_Alien: {fileID: 0}
+  bloodyMess: {fileID: 0}
   door_open: {fileID: 0}
   elevator_Doors: {fileID: 0}
   elevator_Button_Number: {fileID: 0}

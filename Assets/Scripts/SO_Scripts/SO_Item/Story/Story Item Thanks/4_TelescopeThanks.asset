@@ -14,4 +14,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storyItemName: 
   thanks:
-  - Thanks for finding the telescope.
+  - 'You found it! '
+  - We can now blow up the UFO.
+  - ...
+  - Okay, fine. No, this isn't a catapult.
+  - It's a laser canon.
+  - These aliens came here from another solar system.
+  - 'Their UFO is hovering right above in stealth mode. '
+  - I need to set off an EMP to disable...
+  - ...the UFO's stealth system so that we...
+  - ...can shoot it down with this laser.
+  - After I set off the EMP...
+  - ...I should have a five minute window...
+  - ...to shoot it down.
+  - Okay, here we go!
+  - '3! 2! 1! '
+  - +...
+  - Now, I just need to start the machine...
+  - ...with the key.
+  - Wait...where's my key?
+  - Oh, fucking hell.
+  - I left the key in my room.
+  - You need to go get it!!!!!
+  - GO! NOW!!!

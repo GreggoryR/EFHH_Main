@@ -15,6 +15,7 @@ public class ItemPickup : MonoBehaviour
     bool canPickUP = false;
     //SpriteRenderer colorRenderer;
     [SerializeField] GameObject playerButtonCanvas;
+    [SerializeField] Animator playerAnimator;
 
     private void Awake()
     {
@@ -24,7 +25,10 @@ public class ItemPickup : MonoBehaviour
     {
         if (canPickUP && Input.GetKeyDown(KeyCode.E))
         {
+            playerAnimator.SetBool("GrabDown", true);
+            GameManager.instance.canMove = false;
             Pickup();
+
         }
 
     }
@@ -39,8 +43,8 @@ public class ItemPickup : MonoBehaviour
             Inventory.instance.hasAdded = true;
             playerButtonCanvas.SetActive(false);
             Destroy(gameObject);
+            NotificationBroker.ItemRecievedFromDeskCall(itemSO.recieveMessageGround);
         }
-            
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

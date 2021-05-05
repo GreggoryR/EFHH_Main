@@ -22,18 +22,23 @@ public class StartMessages : MonoBehaviour
         {
             case 0:
                 NotificationBroker.GameStartBeginsCall(startMessageInformation);
+                GameManager.instance.GetComponent<CheckpointManager>().CreateCheckpoint();
                 break;
             case 1:
                 NotificationBroker.NewChapterBeginsCall(oneMessage);
+                GameManager.instance.GetComponent<CheckpointManager>().CreateCheckpoint();
                 break;
             case 2:
                 NotificationBroker.NewChapterBeginsCall(twoMessage);
+                GameManager.instance.GetComponent<CheckpointManager>().CreateCheckpoint();
                 break;
             case 3:
                 if (!StoryManager.instance.chapterThreeStarted)
                 {
                     NotificationBroker.NewChapterBeginsCall(threeMessage);
+                    GameManager.instance.GetComponent<CheckpointManager>().CreateCheckpoint();
                     StoryManager.instance.chapterThreeStarted = true;
+
                 }
                 break;
             case 4:
@@ -41,6 +46,7 @@ public class StartMessages : MonoBehaviour
                 {
                     NotificationBroker.NewChapterBeginsCall(fourMessage);
                     StoryManager.instance.chapterFourStarted = true;
+                    GameManager.instance.GetComponent<CheckpointManager>().CreateCheckpoint();
                 }
                 break;
             case 5:
@@ -48,6 +54,7 @@ public class StartMessages : MonoBehaviour
                 {
                     NotificationBroker.NewChapterBeginsCall(fiveMessage);
                     StoryManager.instance.chapterFiveStarted = true;
+                    GameManager.instance.GetComponent<CheckpointManager>().CreateCheckpoint();
                 }
                 break;
             case 6:

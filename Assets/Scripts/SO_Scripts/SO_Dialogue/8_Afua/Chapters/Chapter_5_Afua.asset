@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Chapter_5_Afua
   m_EditorClassIdentifier: 
   chapter: Chapter_5_Afua
-  sectionDialogues: []
+  sectionDialogues:
+  - {fileID: 11400000, guid: 4910ff60683a9104cb023987293bdc7d, type: 2}

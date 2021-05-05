@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Chapter_5_Ayako
   m_EditorClassIdentifier: 
   chapter: Chapter_5_Ayako
-  sectionDialogues: []
+  sectionDialogues:
+  - {fileID: 11400000, guid: 2a76e65bddafa0e4c88de0781e857e62, type: 2}

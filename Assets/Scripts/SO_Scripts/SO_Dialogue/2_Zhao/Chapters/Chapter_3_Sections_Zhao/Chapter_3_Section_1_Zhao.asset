@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96b5ad94b754e734d8b30e1c2c69a0b5, type: 3}
+  m_Name: Chapter_3_Section_1_Zhao
+  m_EditorClassIdentifier: 
+  sectionName: Name
+  storyDialoguesForSection:
+  - One of the best memories I have at the club...
+  - ...involved a very large man with a belly that went past his waist.
+  - There was a stage where paid performers would dance and sing.
+  - But that day, the large man decided, against everyone's wishes, to go on stage
+    and perform.
+  - He stood there--the music had stopped--the stage light shining on him with this
+    huge shadow behind him.
+  - There was only silence.
+  - 'And then...he sang. '
+  - 'And it wasn''t your normal type of singing. '
+  - It was the most beautiful singing anyone at the club had heard.
+  - 'Everyone stared in shock but listend with pure amazement. '
+  - When he finished, he was drenched in sweat. His chest heaving from being out
+    of breath.
+  - 'And then, just like that, everyone started clapping and cheering. '
+  - His face was bright red. He was smiling from ear to ear. Probably from the alcohol
+    but also pride.
+  - After that, everyone from the crowd wanted to go on stage and sing.
+  - It felt like in that moment, sharing that experience, everyone became a family.
+  - 'We sang, drank, and danced until morning. '
+  - I'll cherish those memories.

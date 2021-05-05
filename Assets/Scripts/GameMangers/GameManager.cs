@@ -43,15 +43,24 @@ public class GameManager : MonoBehaviour
     #region Story
     [SerializeField] public int chapter = 0; //keep track moving scene to scene
     public List<List<int>> chapterWithSections; //keep track moving scene to scene
+    public bool cutScenePlaying;
+    public bool gameOver = false;
+    public bool foundRemote = false;
+    #endregion
 
+    #region Checkpoint
+    
     #endregion
 
     #region Player
     public readonly int playerMaxHealth = 5;
     [SerializeField] public int playerHealth = 5;
     public bool canMove = true;
+    public bool canPunch = true;
     [HideInInspector] public bool isTalking = false;
-    [HideInInspector] public bool beingChased = false;
+    [HideInInspector] public bool isPunching = false;
+    public bool beingChased = false;
+    [HideInInspector] public bool storyMoment = false;
     [SerializeField] public bool talkedToAfua = false;
     [SerializeField] public bool talkedToJose = false;
     [SerializeField] public bool sawAlien = false;
@@ -122,30 +131,41 @@ public class GameManager : MonoBehaviour
     //100 Points - Be a Friend(hint: it's okay just be present sometimes) - (will unlock if they stand next to Kwan for 60 seconds without talking or moving)
     #endregion
 
-    #region DEV
-    [SerializeField] Text info1;
-    [SerializeField] Text info2;
-    [SerializeField] Text info3;
-    [SerializeField] Text info4;
-    [SerializeField] Text info5;
-    [SerializeField] Text info6;
+    #region Game Points and Time
+    [SerializeField] public int points;
+    [SerializeField] public float timePlayed;
     #endregion
 
     public void Start()
     {
         location = Location.first;
-
-
     }
-    public void GameOver()
+
+    void Update()
     {
-        Debug.Log("Game Over");
+        timePlayed += Time.deltaTime;
     }
+
+    public string TimePlayedToText()
+    {
+        string minutes = (timePlayed / 60).ToString("00");
+        string seconds = (timePlayed % 60).ToString("00");
+        string miliseconds = ((timePlayed * 60) % 60).ToString("00");
+        string text = minutes + ":" + seconds + ":" + miliseconds;
+        return text;
+    }
+
     public void StopChasing()
     {
         if (onNotChasingAnymore != null && beingChased)
         {
             onNotChasingAnymore.Invoke();
         }
+    }
+
+    public void GameOver()
+    {
+        Debug.Log("Game Over");
+        GameOverUIBroker.GameIsOverCall();
     }
 }

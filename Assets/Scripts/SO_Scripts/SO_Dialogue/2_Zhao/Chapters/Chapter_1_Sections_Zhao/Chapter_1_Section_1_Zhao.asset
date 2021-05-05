@@ -14,14 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sectionName: Name
   storyDialoguesForSection:
-  - You like my music? I like to collect albums. I was a hostess for a very prominent
-    club back in the day.
-  - 'After I got married, I was forbidden from working there anymore as my new family
-    was too proud. '
-  - 'They never did like me. But at least my sweet husband did. '
-  - "At the club, we would drink and smoke all the time, but I\u2019ve lost my appetite
-    for any type of alcohol. "
-  - I do love smoking, though. The warm feeling in my chest. It takes me back to
-    those late nights when it felt like time would never end.
+  - 'You like my music? I like to collect albums. '
+  - I was a hostess for a very prominent club back in the day.
+  - 'After I got married, I was forbidden from working at the club anymore... '
+  - My new family was too proud...
+  - 'They never did like me but at least my sweet husband did. '
+  - "At the club, we used to drink and smoke all the time, but I\u2019ve lost my
+    appetite for any type of alcohol. "
+  - 'I do love smoking, though. '
+  - The warm feeling in my chest. It takes me back to those late nights when it felt
+    like time would never end.
   - "If only I had a lighter or some matches. At least then I\u2019d be able to smoke
     next to the window\u2026"

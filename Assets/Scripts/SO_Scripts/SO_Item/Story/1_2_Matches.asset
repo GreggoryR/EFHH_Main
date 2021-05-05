@@ -21,6 +21,8 @@ MonoBehaviour:
   inventoryIcon: {fileID: 21300000, guid: d1adfd4781eab6541b950698e485ca24, type: 3}
   inventorySelectedIcon: {fileID: 21300000, guid: e658124d2ee93df4f849f9b7cb58205b,
     type: 3}
-  recieveMessage: {fileID: 11400000, guid: 98f9088f91589ab47a5b4312c8a5b7eb, type: 2}
+  recieveMessageNPC: {fileID: 11400000, guid: 98f9088f91589ab47a5b4312c8a5b7eb, type: 2}
+  recieveMessageDesk: {fileID: 0}
+  recieveMessageGround: {fileID: 0}
   itemThanks: 
   itemInReturn: ZhaoBeer

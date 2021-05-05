@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterName: Jose
   story: {fileID: 11400000, guid: 956b71d5118d3864397225e134e74ea4, type: 2}
+  givenItem: 0
+  itemThanks: []
+  nameNPC: 6

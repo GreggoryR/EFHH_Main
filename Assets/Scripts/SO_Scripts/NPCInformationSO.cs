@@ -9,5 +9,7 @@ public class NPCInformationSO : ScriptableObject
     public DialogueFrameSO story;
     public bool givenItem = false;
     public List<StoryItemThanks> itemThanks;
+    public enum NPC { Bishop, Zhao, Barry, Sam, Oliver, Kwan, Jose, Ayako, Afua};
+    [SerializeField] public NPC nameNPC;
 
 }

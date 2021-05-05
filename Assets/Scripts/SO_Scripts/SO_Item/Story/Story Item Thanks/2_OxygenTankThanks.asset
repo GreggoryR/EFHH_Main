@@ -14,4 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   storyItemName: 
   thanks:
-  - Thanks for finding the oxygen tank.
+  - Nice, that will really help with the laser canon.
+  - 'I''m sorry? No, you said laser canon. '
+  - 'I said catapult. '
+  - The next item is going to be tricky to get.
+  - You'll need to find a way into the basement.
+  - The elevator has a keypad...
+  - ...but I can't remember the code.
+  - 'You need to figure out the code. '
+  - Ask Sam if he knows.

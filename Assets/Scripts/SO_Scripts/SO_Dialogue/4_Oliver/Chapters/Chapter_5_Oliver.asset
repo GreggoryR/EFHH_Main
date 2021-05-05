@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Chapter_5_Oliver
   m_EditorClassIdentifier: 
   chapter: Chapter_5_Oliver
-  sectionDialogues: []
+  sectionDialogues:
+  - {fileID: 11400000, guid: 042441e8211f83c439b12ac502ec62e9, type: 2}

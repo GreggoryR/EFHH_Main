@@ -32,7 +32,7 @@ public class PlayerFound : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("PlayerPoint"))
         {
             playerInCircle = true;
             FindWall = FindPlayerOrWall(collision);
@@ -41,7 +41,7 @@ public class PlayerFound : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("PlayerPoint"))
         {
             try
             {
@@ -56,11 +56,13 @@ public class PlayerFound : MonoBehaviour
     }
     private IEnumerator FindPlayerOrWall(Collider2D collision)
     {
-        if (playerInCircle && !GameManager.instance.beingChased)
+        if (playerInCircle && !GameManager.instance.storyMoment)
         {
-            LayerMask nm = LayerMask.GetMask("Radar"); //need to convert the layer to bitwise with <<
-            RaycastHit2D hit = Physics2D.Linecast(enemyPosition.position, collision.transform.position, nm);
-            if (!hit)
+            LayerMask wall = LayerMask.GetMask("Radar"); //need to convert the layer to bitwise with <<
+            LayerMask door = LayerMask.GetMask("Door");
+            RaycastHit2D hitWall = Physics2D.Linecast(enemyPosition.position, collision.transform.position, wall);
+            RaycastHit2D hitDoor = Physics2D.Linecast(enemyPosition.position, collision.transform.position, door);
+            if (!hitWall && !hitDoor)
             {
                 ChasePlayer();
                 yield return null;

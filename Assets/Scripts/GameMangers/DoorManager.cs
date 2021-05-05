@@ -10,6 +10,7 @@ using static ItemManager;
 
 public class DoorManager : MonoBehaviour
 {
+    [SerializeField] GameObject doorAnimation;
     [SerializeField] GameObject playerButtonCanvas;
 
     [SerializeField] Material[] doorRadarColors;
@@ -30,6 +31,9 @@ public class DoorManager : MonoBehaviour
 
     [SerializeField] MessageSO doorIsLockedMessage;
 
+    [SerializeField] bool topDoor = false;
+    [SerializeField] bool openDoor = false;
+
     public void Start()
     {
         switch (doorLocked)
@@ -44,6 +48,10 @@ public class DoorManager : MonoBehaviour
                 break;
         }
         doorCollider = GetComponent<BoxCollider2D>();
+        if (openDoor)
+        {
+            TryToOpenDoor();
+        }
     }
     private void Update()
     {
@@ -55,11 +63,11 @@ public class DoorManager : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("PlayerPoint"))
         {
             playerIsNextToDoor = true;
             GameManager.instance.currentDoor = gameObject;
-            if (!doorIsLocked)
+            if (!doorIsLocked && !openDoor)
             {
                 playerButtonCanvas.SetActive(true);
             }
@@ -74,7 +82,7 @@ public class DoorManager : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("PlayerPoint"))
         {
             playerIsNextToDoor = false;
             GameManager.instance.currentDoor = null;
@@ -90,6 +98,35 @@ public class DoorManager : MonoBehaviour
         {
             switch (doorType)
             {
+                case DoorType.bedroom:
+                    switch (doorLocked)
+                    {
+                        case DoorLocked.locked:
+                            NotificationBroker.DoorIsLockedCall(doorIsLockedMessage);
+                            break;
+                        case DoorLocked.unlocked:
+                            if (topDoor)
+                            {
+                                doorAnimation.GetComponent<Animator>().Play("backDoorAnimation");
+                            }
+                            else
+                            {
+                                doorAnimation.GetComponent<Animator>().Play("DoorOpenAni");
+                            }
+                            
+                            playerButtonCanvas.SetActive(false);
+                            
+                            
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case DoorType.ayako:
+                    playerButtonCanvas.SetActive(false);
+                    break;
+                default:
+                    break;
                 case DoorType.topHallway:
                     switch (doorLocked)
                     {
@@ -97,6 +134,8 @@ public class DoorManager : MonoBehaviour
                             NotificationBroker.DoorIsLockedCall(doorIsLockedMessage);
                             break;
                         case DoorLocked.unlocked:
+                            doorAnimation.GetComponent<Animator>().Play("backDoorAnimation");
+                            //doorAnimation.GetComponent<Animator>().Play("DoorOpenAni");
                             doorCollider.enabled = false;
                             topHallwayRoof.SetActive(false);
                             topHallwayRadar.SetActive(true);
@@ -124,31 +163,24 @@ public class DoorManager : MonoBehaviour
                             break;
                     }
                     break;
-                    break;
-                case DoorType.bedroom:
-                    switch (doorLocked)
-                    {
-                        case DoorLocked.locked:
-                            NotificationBroker.DoorIsLockedCall(doorIsLockedMessage);
-                            break;
-                        case DoorLocked.unlocked:
-                            doorCollider.enabled = false;
-                            playerButtonCanvas.SetActive(false);
-                            doorLight.SetActive(true);
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case DoorType.ayako:
-                    playerButtonCanvas.SetActive(false);
-                    break;
-                default:
-                    break;
             }
         }
         //move collider for the animation?
         //play animation
         //on animaton exit, destroy collider
+        
+    }
+    public void TurnOnLight()
+    {
+        if (topDoor)
+        {
+            doorLight.SetActive(true);
+            doorCollider.enabled = false;
+        }
+    }
+
+    public void OpenBottonDoor()
+    {
+        doorCollider.enabled = false;
     }
 }
